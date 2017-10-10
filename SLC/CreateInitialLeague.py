@@ -1,16 +1,23 @@
 import numpy as np
+from TestFoo import *
 
 def CreateInitialLeague(settings):
     nteams = settings['nteams']
     nmain = settings['nmain']
-    nres = settings['nres']
+    nsubs = settings['nsubs']
     dim = settings['dim']
     lower_bound = settings['lower_bound']
     upper_bound = settings['upper_bound']
 
-    # We reshape to 2 for making a difference between main and reserve players of the same team.
-    # The league has the following format: it is splitted into teams, which are as well splitted
-    # into main and reserve players.
-    league = np.random.uniform(lower_bound,upper_bound,nteams*2*nmain*dim).reshape(nteams,2,nmain,dim)
+    # League is splitted into two matrices, representing main and subs players of each team
+    league_main = np.random.uniform(lower_bound,upper_bound,nteams*nmain*dim).reshape(nteams,nmain,dim)
+    league_subs = np.random.uniform(lower_bound,upper_bound,nteams*nsubs*dim).reshape(nteams,nsubs,dim)
 
-    # Now the 'Takhsis' is called for having the players sorted according to their fitness.
+    # Fitness arrays
+    #print (TestFoo(league_main[0][0]))
+    fitness_main = np.ones(nteams*nmain)
+    fitness_subs = np.ones(nteams*nsubs)
+
+    # TODO assign correct values to fitness arrays
+
+    # Now the 'Takhsis' is called for having the players sorted according to their fitness
