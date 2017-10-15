@@ -4,7 +4,7 @@
 
 Research and statistic study on some Socioinspired Algorithms for my bachelor's thesis.
 
-I will be uploading source code from each one of them as I implement it. At the end, there will be 8 algorithms:
+I will be uploading source code from each one of them as I implement them. At the end, there will be 8 algorithms:
 - Soccer League Competition (SLC)
 - League Championship Algorithm (LCA)
 - Ideology Algorithm (IA)
