@@ -1,5 +1,6 @@
 import numpy as np
 from TestFoo import *
+from Takhsis import *
 
 def CreateInitialLeague(settings):
     nteams = settings['nteams']
@@ -14,7 +15,8 @@ def CreateInitialLeague(settings):
     league_subs = np.random.uniform(lower_bound,upper_bound,nteams*nsubs*dim).reshape(nteams,nsubs,dim)
 
     # Fitness arrays
-    fitness_main = np.apply_along_axis(TestFoo, 1, league_main)
-    fitness_subs = np.apply_along_axis(TestFoo, 1, league_subs)
+    fitness_main = np.apply_along_axis(TestFoo, 2, league_main)
+    fitness_subs = np.apply_along_axis(TestFoo, 2, league_subs)
 
     # Now the 'Takhsis' is called for having the players sorted according to their fitness
+    Takhsis(league_main, league_subs, fitness_main, fitness_subs, settings)
