@@ -20,3 +20,5 @@ def CreateInitialLeague(settings):
 
     # Now the 'Takhsis' is called for having the players sorted according to their fitness
     league_main,league_subs,fitness_main,fitness_subs = Takhsis(league_main, league_subs, fitness_main, fitness_subs, settings)
+
+    return league_main,league_subs,fitness_main,fitness_subs

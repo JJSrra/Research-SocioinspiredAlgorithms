@@ -23,4 +23,4 @@ if __name__ == "__main__":
     mutation_probability = 0.1
     mutation_rate = 0.2
 
-    league = CreateInitialLeague(settings)
+    league_main, league_subs, fitness_main, fitness_subs = CreateInitialLeague(settings)
