@@ -16,8 +16,11 @@ def Takhsis(league_main, league_subs, fitness_main, fitness_subs, settings):
     fitness = fitness[order]
 
     league = np.reshape(league, (2*nteams, nmain, dim))
+    fitness = np.reshape(fitness, (2*nteams, nmain))
 
     league_main = league[0:2*nteams:2]
     league_subs = league[1:2*nteams:2]
     fitness_main = fitness[0:2*nteams:2]
     fitness_subs = fitness[1:2*nteams:2]
+
+    return league_main, league_subs, fitness_main, fitness_subs

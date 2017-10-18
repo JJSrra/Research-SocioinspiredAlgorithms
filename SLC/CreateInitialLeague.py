@@ -19,4 +19,4 @@ def CreateInitialLeague(settings):
     fitness_subs = np.apply_along_axis(TestFoo, 2, league_subs)
 
     # Now the 'Takhsis' is called for having the players sorted according to their fitness
-    Takhsis(league_main, league_subs, fitness_main, fitness_subs, settings)
+    league_main,league_subs,fitness_main,fitness_subs = Takhsis(league_main, league_subs, fitness_main, fitness_subs, settings)
