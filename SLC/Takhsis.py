@@ -23,7 +23,7 @@ def Takhsis(league_main, league_subs, fitness_main, fitness_subs, settings):
     league_main = league[per_league].reshape(nteams,nmain,dim)
     league_subs = league[~per_league].reshape(nteams,nsubs,dim)
 
-    fitness_main = fitness[per_league]
-    fitness_subs = fitness[~per_league]
+    fitness_main = fitness[per_league].reshape(nteams,nmain)
+    fitness_subs = fitness[~per_league].reshape(nteams,nmain)
 
     return league_main, league_subs, fitness_main, fitness_subs
