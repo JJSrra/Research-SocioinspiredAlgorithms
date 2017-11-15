@@ -10,5 +10,5 @@ def Competition(league_main, league_subs, fitness_main, fitness_subs, settings):
         for j in range(i+1,nteams):
             print (i, j)
             winner, loser = ProbabilityHost(i,j,league_main,fitness_main)
-            Imitation(winner, league_main, fitness_main, settings)
+            league_main, fitness_main, settings = Imitation(winner, league_main, fitness_main, settings)
             #Provocation(winner, league_subs, fitness_subs, settings)
