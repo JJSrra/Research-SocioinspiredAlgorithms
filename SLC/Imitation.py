@@ -37,4 +37,4 @@ def Imitation(winner, league_main, fitness_main, settings):
                     league_main[winner][i] = new_player
                     fitness_main[winner][i] = new_fitness
 
-        return league_main, fitness_main, settings
+    return league_main, fitness_main, settings
