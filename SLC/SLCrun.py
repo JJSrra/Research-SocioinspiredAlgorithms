@@ -4,6 +4,7 @@
 
 import numpy as np
 from CreateInitialLeague import *
+from Competition import *
 
 if __name__ == "__main__":
 
@@ -11,7 +12,7 @@ if __name__ == "__main__":
 
     # Define settings of the problem
     settings = {'number_of_function_evaluation': 50000, 'dim': 10, 'nteams': 5,
-                'lower_bound': -10, 'upper_bound': 10}
+                'lower_bound': 0, 'upper_bound': 10}
 
     # Number of main and subs players are equal to the dimension of the problem,
     # although this may change
@@ -24,3 +25,5 @@ if __name__ == "__main__":
     mutation_rate = 0.2
 
     league_main, league_subs, fitness_main, fitness_subs = CreateInitialLeague(settings)
+
+    Competition(league_main, league_subs, fitness_main, fitness_subs, settings)
