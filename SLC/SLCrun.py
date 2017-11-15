@@ -12,17 +12,13 @@ if __name__ == "__main__":
 
     # Define settings of the problem
     settings = {'number_of_function_evaluation': 50000, 'dim': 10, 'nteams': 5,
-                'lower_bound': 0, 'upper_bound': 10}
+                'lower_bound': 0, 'upper_bound': 10, 'neval': 0, 'max_it': 10**8,
+                'mutation_probability': 0.1, 'mutation_rate': 0.2}
 
     # Number of main and subs players are equal to the dimension of the problem,
     # although this may change
     settings['nmain'] = settings['dim']
     settings['nsubs'] = settings['dim']
-
-    neval = 0
-    max_it = 10**8
-    mutation_probability = 0.1
-    mutation_rate = 0.2
 
     league_main, league_subs, fitness_main, fitness_subs = CreateInitialLeague(settings)
 
