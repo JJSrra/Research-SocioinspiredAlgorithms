@@ -5,6 +5,7 @@
 import numpy as np
 from CreateInitialLeague import *
 from Competition import *
+from Takhsis import *
 
 if __name__ == "__main__":
 
@@ -20,6 +21,8 @@ if __name__ == "__main__":
     settings['nmain'] = settings['dim']
     settings['nsubs'] = settings['dim']
 
+    # Creation of the initial league
     league_main, league_subs, fitness_main, fitness_subs = CreateInitialLeague(settings)
 
+    # Seasons will be launched until 'max_it' evaluations of cost function are reached
     Competition(league_main, league_subs, fitness_main, fitness_subs, settings)
