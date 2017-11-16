@@ -28,5 +28,9 @@ def Provocation(winner, league_main, league_subs, fitness_subs, settings):
             if new_fitness < fitness_subs[winner][i]:
                 league_subs[winner][i] = new_player
                 fitness_subs[winner][i] = new_fitness
+            else:
+                league_subs[winner][i] = np.random.uniform(lower_bound, upper_bound, dim)
+                fitness_subs[winner][i] = TestFoo(league_subs[winner][i])
+                settings['neval'] += 1
 
     return league_subs, fitness_subs, settings
