@@ -1,5 +1,6 @@
 import numpy as np
 import random
+from TestFoo import *
 
 def Provocation(winner, league_main, league_subs, fitness_subs, settings):
 
