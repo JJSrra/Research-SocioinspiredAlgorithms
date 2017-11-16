@@ -7,6 +7,7 @@ def Provocation(winner, league_main, league_subs, fitness_subs, settings):
     nsubs = settings['nsubs']
     lower_bound = settings['lower_bound']
     upper_bound = settings['upper_bound']
+    dim = settings['dim']
 
     for i in range (0, nsubs):
         gravity = np.mean(league_main[winner], axis=0)
