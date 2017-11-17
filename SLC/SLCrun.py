@@ -26,4 +26,11 @@ if __name__ == "__main__":
 
     # Seasons keep on launching until 'max_it' seasons have been played, or until 'neval' reaches number of Cost
     # Function evaluations that were indicated as a ceiling parameter
-    league_main,league_subs,fitness_main,fitness_subs,settings = Competition(league_main,league_subs,fitness_main,fitness_subs,settings)
+    for it in range(0,settings['max_it']):
+        league_main,league_subs,fitness_main,fitness_subs,settings = Competition(league_main,league_subs,fitness_main,fitness_subs,settings)
+        league_main,league_subs,fitness_main,fitness_subs = Takhsis(league_main,league_subs,fitness_main,fitness_subs,settings)
+
+        print("Season {}, best solution: {}".format(it, fitness_main[0][0]))
+
+        if settings['neval'] > settings['number_of_function_evaluation']:
+            break
