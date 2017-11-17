@@ -22,7 +22,8 @@ if __name__ == "__main__":
     settings['nsubs'] = settings['dim']
 
     # Creation of the initial league
-    league_main, league_subs, fitness_main, fitness_subs = CreateInitialLeague(settings)
+    league_main,league_subs,fitness_main,fitness_subs = CreateInitialLeague(settings)
 
-    # Seasons will be launched until 'max_it' evaluations of cost function are reached
-    Competition(league_main, league_subs, fitness_main, fitness_subs, settings)
+    # Seasons keep on launching until 'max_it' seasons have been played, or until 'neval' reaches number of Cost
+    # Function evaluations that were indicated as a ceiling parameter
+    league_main,league_subs,fitness_main,fitness_subs,settings = Competition(league_main,league_subs,fitness_main,fitness_subs,settings)
