@@ -25,7 +25,7 @@ if __name__ == "__main__":
     league_main,league_subs,fitness_main,fitness_subs = CreateInitialLeague(settings)
 
     # Seasons keep on launching until 'max_it' seasons have been played, or until 'neval' reaches number of Cost
-    # Function evaluations that were indicated as a ceiling parameter
+    # Function evaluations that was indicated as a ceiling parameter
     for it in range(0,settings['max_it']):
         league_main,league_subs,fitness_main,fitness_subs,settings = Competition(league_main,league_subs,fitness_main,fitness_subs,settings)
         league_main,league_subs,fitness_main,fitness_subs = Takhsis(league_main,league_subs,fitness_main,fitness_subs,settings)
