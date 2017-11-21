@@ -1,13 +1,10 @@
 import numpy as np
-from TestFoo import *
 
 # Reorders the league and assigns best players to first team (main and subs) and so on.
-def Takhsis(league_main, league_subs, fitness_main, fitness_subs, settings):
+def Takhsis(league_main, league_subs, fitness_main, fitness_subs):
 
-    nteams = settings['nteams']
-    nmain = settings['nmain']
-    nsubs = settings['nsubs']
-    dim = settings['dim']
+    nteams, nmain, dim = league_main.shape
+    nsubs = league_subs.shape[1]
 
     # Both league arrays are merged into a common one, as well as both fitness arrays
     league = np.append(league_main, league_subs).reshape(nteams*(nmain+nsubs),dim)
