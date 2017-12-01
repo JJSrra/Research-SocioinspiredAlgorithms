@@ -2,8 +2,9 @@ import numpy as np
 from ProbabilityHost import *
 from Imitation import *
 from Provocation import *
+from LoserFunction import *
 
-def Competition(CostFunction,league_main,league_subs,fitness_main,fitness_subs,domain):
+def Competition(CostFunction,league_main,league_subs,fitness_main,fitness_subs,domain,mutation_rate,mutation_probability):
 
     nteams = league_main.shape[0]
     evals_competition = 0
@@ -15,5 +16,8 @@ def Competition(CostFunction,league_main,league_subs,fitness_main,fitness_subs,d
                         winner,league_main,fitness_main,domain,evals_competition)
             league_subs,fitness_subs,evals_competition = Provocation(CostFunction,
                         winner,league_main,league_subs,fitness_subs,domain,evals_competition)
+            league_main,fitness_main,league_subs,fitness_subs,evals_competition = LoserFunction(CostFunction,
+                        loser,league_main,fitness_main,league_subs,fitness_subs,mutation_rate,mutation_probability,
+                        domain,evals_competition)
 
     return league_main,league_subs,fitness_main,fitness_subs,evals_competition
