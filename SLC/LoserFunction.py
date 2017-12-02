@@ -15,18 +15,23 @@ def LoserFunction(CostFunction, loser, league_main, fitness_main, league_subs, f
         # Components mutated are different for each player
         components_mutated = np.random.permutation(np.arange(dim))[0:num_mutations]
 
+        # Array with the mutations that will be applied to each component
+        mutations = np.random.uniform(size=num_mutations)
+
         # If the array is not copied intentionally, it will not be possible to check
         # the 'former' player after being mutated
         mutated_player = np.array(league_main[loser][main_selected[i]])
-        mutated_player[components_mutated] += mutation_rate * num_mutations
+        mutated_player[components_mutated] += mutation_rate * mutations
 
         # Fitness evaluation of the mutated players
         mutated_fitness = CostFunction(mutated_player)
         evals_competition += 1
 
-        # If any mutated player is better than its former one, it is now replaced
+        # If any mutated player is better than its former self, it is now replaced
         if mutated_fitness < fitness_main[loser][main_selected[i]]:
             league_main[loser][main_selected[i]] = mutated_player
             fitness_main[loser][main_selected[i]] = mutated_fitness
+
+
 
     return league_main, fitness_main, league_subs, fitness_subs, evals_competition
