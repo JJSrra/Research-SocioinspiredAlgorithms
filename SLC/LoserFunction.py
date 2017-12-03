@@ -16,7 +16,7 @@ def LoserFunction(CostFunction, loser, league_main, fitness_main, league_subs, f
         components_mutated = np.random.permutation(np.arange(dim))[0:num_mutations]
 
         # Array with the mutations that will be applied to each component
-        mutations = np.random.uniform(size=num_mutations)
+        mutations = np.random.uniform(-1,1,num_mutations)
 
         # If the array is not copied intentionally, it will not be possible to check
         # the 'former' player after being mutated
