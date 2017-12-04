@@ -4,6 +4,7 @@ import math
 def LoserFunction(CostFunction, loser, league_main, fitness_main, league_subs, fitness_subs, mutation_rate, mutation_probability, domain, evals_competition):
 
     nmain,dim = league_main.shape[1:]
+    nsubs = league_subs.shape[1]
 
     # Player that are being mutated are selected from a permutation of the loser team
     main_selected = np.random.permutation(np.arange(nmain))[0:3]
@@ -33,5 +34,26 @@ def LoserFunction(CostFunction, loser, league_main, fitness_main, league_subs, f
             fitness_main[loser][main_selected[i]] = mutated_fitness
 
 
+    # Crossover between subs players of the loser team
+    new_mutations = [None for _ in range(2*nsubs)]
+    new_fitness = [None for _ in range(2*nsubs)]
+
+    for i in range(nsubs):
+        # 2 random subs players are main_selected
+        subs_selected = np.random.permutation(np.arange(nsubs))[0:2]
+
+        # Alpha array that will affect the combination of the solutions
+        alpha = np.random.uniform(0,1,dim)
+
+        # 2 new players are generated combining both selected players with alpha weights
+        new_mutations[i*2] = alpha*league_subs[loser][subs_selected[0]] + (1-alpha)*league_subs[loser][subs_selected[1]]
+        new_mutations[(i*2)+1] = alpha*league_subs[loser][subs_selected[1]] + (1-alpha)*league_subs[loser][subs_selected[0]]
+
+        new_fitness[i*2] = CostFunction(new_mutations[i*2])
+        new_fitness[(i*2)+1] = CostFunction(new_mutations[(i*2)+1])
+
+    # All players are gathered, and then they will be reordered and worst players are left out
+    all_players = np.concatenate((league_main[loser], league_subs[loser], new_mutations))
+    all_fitness = np.concatenate((fitness_main[loser], fitness_subs[loser], new_fitness))
 
     return league_main, fitness_main, league_subs, fitness_subs, evals_competition
