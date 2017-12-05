@@ -51,9 +51,20 @@ def LoserFunction(CostFunction, loser, league_main, fitness_main, league_subs, f
 
         new_fitness[i*2] = CostFunction(new_mutations[i*2])
         new_fitness[(i*2)+1] = CostFunction(new_mutations[(i*2)+1])
+        evals_competition += 2
 
     # All players are gathered, and then they will be reordered and worst players are left out
     all_players = np.concatenate((league_main[loser], league_subs[loser], new_mutations))
     all_fitness = np.concatenate((fitness_main[loser], fitness_subs[loser], new_fitness))
+
+    # Players are reordered and reassigned the same as in Takhsis function
+    order = np.argsort(all_fitness)
+    all_players = all_players[order]
+    all_fitness = all_fitness[order]
+
+    league_main[loser] = all_players[0:nmain]
+    fitness_main[loser] = all_fitness[0:nmain]
+    league_subs[loser] = all_players[nmain:(nmain+nsubs)]
+    fitness_subs[loser] = all_fitness[nmain:(nmain+nsubs)]
 
     return league_main, fitness_main, league_subs, fitness_subs, evals_competition
