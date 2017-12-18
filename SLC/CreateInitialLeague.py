@@ -12,8 +12,9 @@ def CreateInitialLeague(CostFunction, nteams, nmain, nsubs, dim, domain):
     # Fitness arrays
     fitness_main = np.apply_along_axis(CostFunction, 2, league_main)
     fitness_subs = np.apply_along_axis(CostFunction, 2, league_subs)
+    initial_evals = nteams*nmain + nteams*nsubs
 
     # Now the 'Takhsis' is called for having the players sorted according to their fitness
     league_main,league_subs,fitness_main,fitness_subs = Takhsis(league_main, league_subs, fitness_main, fitness_subs)
 
-    return league_main,league_subs,fitness_main,fitness_subs
+    return league_main,league_subs,fitness_main,fitness_subs,initial_evals

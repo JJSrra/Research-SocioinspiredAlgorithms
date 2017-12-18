@@ -10,15 +10,16 @@ from Takhsis import *
 def SLC(CostFunction, max_eval=50000, dim=30, nteams=5, nmain=10, nsubs=10, lower_bound=0,
         upper_bound=10, max_it=10**8, mutation_probability=0.1, mutation_rate=0.2):
 
-    # Start number of evaluations
-    neval = 0
-
     # Domain of the problem, tuple including lower and upper bounds
     domain = (lower_bound, upper_bound)
 
     # Creation of the initial league
-    league_main,league_subs,fitness_main,fitness_subs = CreateInitialLeague(CostFunction,
+    league_main,league_subs,fitness_main,fitness_subs,initial_evals = CreateInitialLeague(CostFunction,
                 nteams, nmain, nsubs, dim, domain)
+
+    # Starting number of evaluations
+    neval = initial_evals
+    print(neval)
 
     # Seasons keep on launching until 'max_it' seasons have been played, or until 'neval' reaches number of Cost
     # Function evaluations that was indicated as a ceiling parameter
