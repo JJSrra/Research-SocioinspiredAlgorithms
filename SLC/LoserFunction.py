@@ -21,7 +21,7 @@ def LoserFunction(CostFunction, loser, league_main, fitness_main, league_subs, f
 
         # If the array is not copied intentionally, it will not be possible to check
         # the 'former' player after being mutated
-        mutated_player = np.array(league_main[loser][main_selected[i]])
+        mutated_player = np.copy(league_main[loser][main_selected[i]])
         mutated_player[components_mutated] += mutation_rate * mutations
 
         # Fitness evaluation of the mutated players
