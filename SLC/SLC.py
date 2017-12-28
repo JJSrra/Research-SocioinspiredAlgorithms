@@ -19,7 +19,6 @@ def SLC(CostFunction, max_eval=50000, dim=30, nteams=5, nmain=10, nsubs=10, lowe
 
     # Starting number of evaluations
     neval = initial_evals
-    print(neval)
 
     # Seasons keep on launching until 'max_it' seasons have been played, or until 'neval' reaches number of Cost
     # Function evaluations that was indicated as a ceiling parameter

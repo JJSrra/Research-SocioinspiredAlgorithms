@@ -2,8 +2,7 @@ import numpy as np
 from Takhsis import *
 
 def CreateInitialLeague(CostFunction, nteams, nmain, nsubs, dim, domain):
-    lower_bound = domain[0]
-    upper_bound = domain[1]
+    lower_bound, upper_bound = domain
 
     # League is splitted into two matrices, representing main and subs players of each team
     league_main = np.random.uniform(lower_bound,upper_bound,nteams*nmain*dim).reshape(nteams,nmain,dim)

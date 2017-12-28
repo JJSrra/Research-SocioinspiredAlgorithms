@@ -5,6 +5,7 @@ def LoserFunction(CostFunction, loser, league_main, fitness_main, league_subs, f
 
     nmain,dim = league_main.shape[1:]
     nsubs = league_subs.shape[1]
+    lower_bound, upper_bound = domain
 
     # Player that are being mutated are selected from a permutation of the loser team
     main_selected = np.random.permutation(np.arange(nmain))[0:3]
@@ -23,6 +24,9 @@ def LoserFunction(CostFunction, loser, league_main, fitness_main, league_subs, f
         # the 'former' player after being mutated
         mutated_player = np.copy(league_main[loser][main_selected[i]])
         mutated_player[components_mutated] += mutation_rate * mutations
+
+        # Mutated players must be clipped into lower and upper bounds
+        mutated_player = np.clip(mutated_player, lower_bound, upper_bound)
 
         # Fitness evaluation of the mutated players
         mutated_fitness = CostFunction(mutated_player)
@@ -46,8 +50,8 @@ def LoserFunction(CostFunction, loser, league_main, fitness_main, league_subs, f
         alpha = np.random.uniform(0,1,dim)
 
         # 2 new players are generated combining both selected players with alpha weights
-        new_mutations[i*2] = alpha*league_subs[loser][subs_selected[0]] + (1-alpha)*league_subs[loser][subs_selected[1]]
-        new_mutations[(i*2)+1] = alpha*league_subs[loser][subs_selected[1]] + (1-alpha)*league_subs[loser][subs_selected[0]]
+        new_mutations[i*2] = np.clip(alpha*league_subs[loser][subs_selected[0]] + (1-alpha)*league_subs[loser][subs_selected[1]], lower_bound, upper_bound)
+        new_mutations[(i*2)+1] = np.clip(alpha*league_subs[loser][subs_selected[1]] + (1-alpha)*league_subs[loser][subs_selected[0]], lower_bound, upper_bound)
 
         new_fitness[i*2] = CostFunction(new_mutations[i*2])
         new_fitness[(i*2)+1] = CostFunction(new_mutations[(i*2)+1])

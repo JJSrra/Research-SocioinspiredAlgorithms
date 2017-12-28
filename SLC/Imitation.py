@@ -4,8 +4,7 @@ import random
 def Imitation(CostFunction, winner, league_main, fitness_main, domain, evals_competition):
 
     nmain = league_main.shape[1]
-    lower_bound = domain[0]
-    upper_bound = domain[1]
+    lower_bound, upper_bound = domain
 
     for i in range(0,nmain):
         tau = random.uniform(0.2, 0.8)

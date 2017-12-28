@@ -4,9 +4,8 @@ import random
 def Provocation(CostFunction, winner, league_main, league_subs, fitness_subs, domain, evals_competition):
 
     nsubs = league_subs.shape[1]
-    lower_bound = domain[0]
-    upper_bound = domain[1]
     dim = league_subs.shape[2]
+    lower_bound, upper_bound = domain
 
     gravity = np.mean(league_main[winner], axis=0)
     chi_1 = random.uniform(0.9, 1)
