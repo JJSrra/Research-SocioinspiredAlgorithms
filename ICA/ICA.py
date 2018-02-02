@@ -17,4 +17,4 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
     domain = (lower_bound, upper_bound)
 
     # Generation of the initial countries
-    initial_countries = GenerateNewCountries(ncountries, dim, domain)
+    initial_countries, fitness = GenerateNewCountries(ncountries, dim, domain, CostFunction)
