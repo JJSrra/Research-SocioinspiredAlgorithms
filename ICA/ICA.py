@@ -3,6 +3,7 @@
 # Translated to Python By: Juanjo Sierra
 
 from GenerateNewCountries import *
+from CreateInitialEmpires import *
 
 def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
         revolution_rate=0.3, assimilation_coef=2, assimilation_angle_coef=0.5,
@@ -18,3 +19,5 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
 
     # Generation of the initial countries
     initial_countries, fitness = GenerateNewCountries(ncountries, dim, domain, CostFunction)
+
+    CreateInitialEmpires(initial_countries, fitness, nimperialists)
