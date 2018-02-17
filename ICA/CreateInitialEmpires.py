@@ -1,6 +1,6 @@
 import numpy as np
 
-def CreateInitialEmpires(countries, fitness, nimperialists):
+def CreateInitialEmpires(countries, fitness, nimperialists, zeta):
 
     num_colonies = np.shape(countries)[0] - nimperialists
 
@@ -27,3 +27,10 @@ def CreateInitialEmpires(countries, fitness, nimperialists):
     cumulative_colonies_per_imperialist = np.cumsum(colonies_per_imperialist).astype(int)
     empires = np.split(colonies, cumulative_colonies_per_imperialist)
     empires_fitness = np.split(colonies_fitness, cumulative_colonies_per_imperialist)
+    empires_total_cost = []
+
+    # We gather the imperialists for associating them with their empires
+    for i in range(0,nimperialists):
+        np.insert(empires[i], 0, imperialists[i], axis=0)
+        np.insert(empires_fitness[i], 0, imperialist_fitness[i], axis=0)
+        empires_total_cost.append(empires_fitness[i][0] + zeta * np.mean(empires_fitness[i][1:]))
