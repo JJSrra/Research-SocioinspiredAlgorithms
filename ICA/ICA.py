@@ -20,4 +20,5 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
     # Generation of the initial countries
     initial_countries, fitness = GenerateNewCountries(ncountries, dim, domain, CostFunction)
 
-    CreateInitialEmpires(initial_countries, fitness, nimperialists, zeta)
+    # Initial empires are defined
+    empires, empires_fitness, empires_total_cost = CreateInitialEmpires(initial_countries, fitness, nimperialists, zeta)
