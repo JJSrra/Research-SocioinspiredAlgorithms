@@ -1,6 +1,6 @@
 import numpy as np
 
-def GenerateNewCountries(ncountries, dim, domain, CostFunction):
+def GenerateNewCountries(ncountries, dim, domain):
     lower_bound, upper_bound = domain
 
     # New countries are generated
