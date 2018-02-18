@@ -25,7 +25,7 @@ def CreateInitialEmpires(countries, fitness, nimperialists, zeta):
     colonies_fitness = colonies_fitness[randperm]
 
     cumulative_colonies_per_imperialist = np.cumsum(colonies_per_imperialist).astype(int)
-    empires = np.split(colonies, cumulative_colonies_per_imperialist)
+    empires = np.split(colonies, cumulative_colonies_per_imperialist)[0:nimperialists]
     empires_fitness = np.split(colonies_fitness, cumulative_colonies_per_imperialist)
     empires_total_cost = []
 
