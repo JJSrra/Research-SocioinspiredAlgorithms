@@ -4,6 +4,7 @@
 
 from GenerateNewCountries import *
 from CreateInitialEmpires import *
+from AssimilateColonies import *
 
 def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
         revolution_rate=0.3, assimilation_coef=2, assimilation_angle_coef=0.5,
@@ -22,3 +23,11 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
 
     # Initial empires are defined
     empires, empires_fitness, empires_total_cost = CreateInitialEmpires(initial_countries, fitness, nimperialists, zeta)
+
+    # Main loop
+    for decade in range(0,decades):
+        revolution_rate = damp_ratio*revolution_rate
+
+        for i in range(0,len(empires)):
+            # Assimilation; movement of colonies towards imperialists (Assimilation Policy)
+            empires[i] = AssimilateColonies(empires[i], domain, assimilation_coef)
