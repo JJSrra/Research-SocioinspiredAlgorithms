@@ -19,7 +19,15 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
     domain = (lower_bound, upper_bound)
 
     # Generation of the initial countries
-    initial_countries, fitness = GenerateNewCountries(ncountries, dim, domain, CostFunction)
+    initial_countries = GenerateNewCountries(ncountries, dim, domain)
+
+    # New countries' cost/fitness is calculated
+    fitness = np.apply_along_axis(CostFunction, 1, initial_countries)
+
+    # And now the countries get sorted by their fitness
+    order = np.argsort(fitness)
+    fitness = fitness[order]
+    initial_countries = initial_countries[order]
 
     # Initial empires are defined
     empires, empires_fitness, empires_total_cost = CreateInitialEmpires(initial_countries, fitness, nimperialists, zeta)
