@@ -5,6 +5,7 @@
 from GenerateNewCountries import *
 from CreateInitialEmpires import *
 from AssimilateColonies import *
+from RevolveColonies import *
 
 def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
         revolution_rate=0.3, assimilation_coef=2, assimilation_angle_coef=0.5,
@@ -37,5 +38,9 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
         revolution_rate = damp_ratio*revolution_rate
 
         for i in range(0,len(empires)):
-            # Assimilation; movement of colonies towards imperialists (Assimilation Policy)
+            # Assimilation: movement of colonies towards imperialists (Assimilation Policy)
             empires[i] = AssimilateColonies(empires[i], domain, assimilation_coef)
+
+            # Revolution: a sudden change in the socio-political characteristics
+            empires[i], empires_fitness[i], evals = RevolveColonies(empires[i],
+                                empires_fitness[i], domain, revolution_rate, CostFunction)
