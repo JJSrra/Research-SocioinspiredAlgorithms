@@ -6,6 +6,7 @@ from GenerateNewCountries import *
 from CreateInitialEmpires import *
 from AssimilateColonies import *
 from RevolveColonies import *
+from PosessEmpire import *
 
 def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
         revolution_rate=0.3, assimilation_coef=2, assimilation_angle_coef=0.5,
@@ -44,3 +45,6 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
             # Revolution: a sudden change in the socio-political characteristics
             empires[i], empires_fitness[i], evals = RevolveColonies(empires[i],
                                 empires_fitness[i], domain, revolution_rate, CostFunction)
+
+            # Empire posession: if a colony has a lower cost than its imperialist, they switch positions
+            empires[i], empires_fitness[i] = PosessEmpire(empires[i], empires_fitness[i])
