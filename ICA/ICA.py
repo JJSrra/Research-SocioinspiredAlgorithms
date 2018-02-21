@@ -7,6 +7,7 @@ from CreateInitialEmpires import *
 from AssimilateColonies import *
 from RevolveColonies import *
 from PosessEmpire import *
+from UniteSimilarEmpires import *
 
 def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
         revolution_rate=0.3, assimilation_coef=2, assimilation_angle_coef=0.5,
@@ -35,7 +36,7 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
     empires, empires_fitness, empires_total_cost = CreateInitialEmpires(initial_countries, fitness, nimperialists, zeta)
 
     # Main loop
-    for decade in range(0,1):
+    for decade in range(0,decades):
         revolution_rate = damp_ratio*revolution_rate
 
         for i in range(0,len(empires)):
@@ -51,3 +52,5 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
 
             # Compute the current cost for each empire
             empires_total_cost[i] = empires_fitness[i][0] + zeta * np.mean(empires_fitness[i][1:])
+
+        empires, empires_fitness = UniteSimilarEmpires(empires, empires_fitness, domain, uniting_threshold)
