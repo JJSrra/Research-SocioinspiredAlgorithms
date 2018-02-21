@@ -35,7 +35,7 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
     empires, empires_fitness, empires_total_cost = CreateInitialEmpires(initial_countries, fitness, nimperialists, zeta)
 
     # Main loop
-    for decade in range(0,decades):
+    for decade in range(0,1):
         revolution_rate = damp_ratio*revolution_rate
 
         for i in range(0,len(empires)):
@@ -48,3 +48,6 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
 
             # Empire posession: if a colony has a lower cost than its imperialist, they switch positions
             empires[i], empires_fitness[i] = PosessEmpire(empires[i], empires_fitness[i])
+
+            # Compute the current cost for each empire
+            empires_total_cost[i] = empires_fitness[i][0] + zeta * np.mean(empires_fitness[i][1:])
