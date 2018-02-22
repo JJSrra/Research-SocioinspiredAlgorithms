@@ -1,6 +1,6 @@
 import numpy as np
 
-def UniteSimilarEmpires(empires, empires_fitness, domain, uniting_threshold):
+def UniteSimilarEmpires(empires, empires_fitness, empires_total_cost, domain, uniting_threshold):
     lower_bound, upper_bound = domain
 
     # The threshold distance is the lower distance two imperialists can be separated by without merging
@@ -24,10 +24,11 @@ def UniteSimilarEmpires(empires, empires_fitness, domain, uniting_threshold):
 
                 empires[best_imperialist] = np.append(empires[best_imperialist], empires[worst_imperialist], axis=0)
                 empires_fitness[best_imperialist] = np.append(empires_fitness[best_imperialist], empires_fitness[worst_imperialist])
+                empires_total_cost[best_imperialist] = empires_fitness[best_imperialist][0] + zeta * np.mean(empires_fitness[best_imperialist][1:])
 
                 # And we get rid of the absorbed empire position
                 del empires[worst_imperialist]
                 del empires_fitness[worst_imperialist]
                 break
 
-    return empires, empires_fitness
+    return empires, empires_fitness, empires_total_cost

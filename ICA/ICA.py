@@ -53,4 +53,6 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
             # Compute the current cost for each empire
             empires_total_cost[i] = empires_fitness[i][0] + zeta * np.mean(empires_fitness[i][1:])
 
-        empires, empires_fitness = UniteSimilarEmpires(empires, empires_fitness, domain, uniting_threshold)
+        # Similar empires are merged into a bigger empire
+        empires, empires_fitness, empires_total_cost = UniteSimilarEmpires(empires, empires_fitness,
+                                empires_total_cost, domain, uniting_threshold)
