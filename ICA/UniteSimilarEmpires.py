@@ -29,6 +29,7 @@ def UniteSimilarEmpires(empires, empires_fitness, empires_total_cost, domain, un
                 # And we get rid of the absorbed empire position
                 del empires[worst_imperialist]
                 del empires_fitness[worst_imperialist]
+                empires_total_cost = np.delete(empires_total_cost, worst_imperialist)
                 break
 
     return empires, empires_fitness, empires_total_cost
