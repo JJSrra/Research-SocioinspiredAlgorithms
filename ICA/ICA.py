@@ -8,6 +8,7 @@ from AssimilateColonies import *
 from RevolveColonies import *
 from PosessEmpire import *
 from UniteSimilarEmpires import *
+from ImperialisticCompetition import *
 
 def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
         revolution_rate=0.3, assimilation_coef=2, assimilation_angle_coef=0.5,
@@ -56,3 +57,6 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
         # Similar empires are merged into a bigger empire
         empires, empires_fitness, empires_total_cost = UniteSimilarEmpires(empires, empires_fitness,
                                 empires_total_cost, domain, uniting_threshold)
+
+        # The imperialistic competition takes place
+        empires, empires_fitness, empires_total_cost = ImperialisticCompetition(empires, empires_fitness, empires_total_cost)
