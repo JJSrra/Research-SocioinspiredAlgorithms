@@ -22,14 +22,8 @@ def UniteSimilarEmpires(empires, empires_fitness, domain, uniting_threshold):
                     best_imperialist = j
                     worst_imperialist = i
 
-                print("\nMejor: {}".format(len(empires[best_imperialist])))
-                print("Peor: {}".format(len(empires[worst_imperialist])))
-
                 empires[best_imperialist] = np.append(empires[best_imperialist], empires[worst_imperialist], axis=0)
                 empires_fitness[best_imperialist] = np.append(empires_fitness[best_imperialist], empires_fitness[worst_imperialist])
-
-                print("Nuevo mejor: {}".format(len(empires[best_imperialist])))
-                print("Peor: {}".format(len(empires[worst_imperialist])))
 
                 # And we get rid of the absorbed empire position
                 del empires[worst_imperialist]
