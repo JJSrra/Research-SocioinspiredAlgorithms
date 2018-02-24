@@ -1,12 +1,12 @@
 import numpy as np
 
-def ImperialisticCompetition(empires, empires_fitness, empires_total_cost):
-    dim = len(empires[0][0])
+def ImperialisticCompetition(imperialists, imperialists_fitness, colonies, colonies_fitness, empires_total_cost):
+    dim = len(colonies[0][0])
     if np.random.rand() > 0.11:
-        return empires, empires_fitness, empires_total_cost
+        return imperialists, imperialists_fitness, colonies, colonies_fitness, empires_total_cost
 
-    if len(empires) <= 1:
-        return empires, empires_fitness, empires_total_cost
+    if len(imperialists) <= 1:
+        return imperialists, imperialists_fitness, colonies, colonies_fitness, empires_total_cost
 
     # Search for the weakest empire (the one with the higher cost)
     weakest_empire = (-empires_total_cost).argsort()[0]
@@ -16,26 +16,30 @@ def ImperialisticCompetition(empires, empires_fitness, empires_total_cost):
 
     # The empire that will conquer the colony is chosen
     selected_empire = SelectAnEmpire(posession_probability)
-    selected_colony = np.random.randint(1, len(empires[weakest_empire]))
+    selected_colony = np.random.randint(0, len(colonies[weakest_empire]))
 
     # Conquest
-    empires[selected_empire] = np.append(empires[selected_empire], empires[weakest_empire][selected_colony].reshape(1,dim), axis=0)
-    empires_fitness[selected_empire] = np.append(empires_fitness[selected_empire], empires_fitness[weakest_empire][selected_colony])
+    colonies[selected_empire] = np.append(colonies[selected_empire], colonies[weakest_empire][selected_colony].reshape(1,dim), axis=0)
+    colonies_fitness[selected_empire] = np.append(colonies_fitness[selected_empire], colonies_fitness[weakest_empire][selected_colony])
 
     # The colony is removed from its former empire
-    empires[weakest_empire] = np.delete(empires[weakest_empire], selected_colony, 0)
-    empires_fitness[weakest_empire] = np.delete(empires_fitness[weakest_empire], selected_colony)
+    colonies[weakest_empire] = np.delete(colonies[weakest_empire], selected_colony, 0)
+    colonies_fitness[weakest_empire] = np.delete(colonies_fitness[weakest_empire], selected_colony)
 
     # If the weakest empire remains with one or less colonies (apart from the imperialist), it is also absorbed
-    if len(empires[weakest_empire]) <= 2:
-        empires[selected_empire] = np.append(empires[selected_empire], empires[weakest_empire], axis=0)
-        empires_fitness[selected_empire] = np.append(empires_fitness[selected_empire], empires_fitness[weakest_empire])
+    if len(colonies[weakest_empire]) <= 1:
+        colonies_addition = np.append(colonies[weakest_empire], imperialists[weakest_empire].reshape(1,dim), axis=0)
+        fitness_addition = np.append(colonies_fitness[weakest_empire], imperialists_fitness[weakest_empire])
+        colonies[selected_empire] = np.append(colonies[selected_empire], colonies_addition, axis=0)
+        colonies_fitness[selected_empire] = np.append(colonies_fitness[selected_empire], fitness_addition)
 
-        del empires[weakest_empire]
-        del empires_fitness[weakest_empire]
+        del colonies[weakest_empire]
+        del colonies_fitness[weakest_empire]
+        imperialists = np.delete(imperialists, weakest_empire, 0)
+        imperialists_fitness = np.delete(imperialists_fitness, weakest_empire)
         empires_total_cost = np.delete(empires_total_cost, weakest_empire)
 
-    return empires, empires_fitness, empires_total_cost
+    return imperialists, imperialists_fitness, colonies, colonies_fitness, empires_total_cost
 
 # A function for selecting a random empire with given probabilities
 def SelectAnEmpire(probability):

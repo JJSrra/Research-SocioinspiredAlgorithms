@@ -6,15 +6,15 @@ def CreateInitialEmpires(countries, fitness, nimperialists, zeta):
 
     # Countries are divided into imperialists and colonies
     imperialists = countries[0:nimperialists]
-    imperialist_fitness = fitness[0:nimperialists]
+    imperialists_fitness = fitness[0:nimperialists]
     colonies = countries[nimperialists:]
     colonies_fitness = fitness[nimperialists:]
 
     # Imperialist power is calculated
-    if max(imperialist_fitness) > 0:
-        imperialist_power = 1.3 * max(imperialist_fitness) - imperialist_fitness
+    if max(imperialists_fitness) > 0:
+        imperialist_power = 1.3 * max(imperialists_fitness) - imperialists_fitness
     else:
-        imperialist_power = 0.7 * max(imperialist_fitness) - imperialist_fitness
+        imperialist_power = 0.7 * max(imperialists_fitness) - imperialists_fitness
 
     # Number of colonies per imperialist are defined according to their power
     colonies_per_imperialist = np.round(imperialist_power/np.sum(imperialist_power) * num_colonies)
@@ -25,14 +25,11 @@ def CreateInitialEmpires(countries, fitness, nimperialists, zeta):
     colonies_fitness = colonies_fitness[randperm]
 
     cumulative_colonies_per_imperialist = np.cumsum(colonies_per_imperialist).astype(int)
-    empires = np.split(colonies, cumulative_colonies_per_imperialist)[0:nimperialists]
-    empires_fitness = np.split(colonies_fitness, cumulative_colonies_per_imperialist)
+    new_colonies = np.split(colonies, cumulative_colonies_per_imperialist)[0:nimperialists]
+    new_colonies_fitness = np.split(colonies_fitness, cumulative_colonies_per_imperialist)
     empires_total_cost = np.array([])
 
-    # We gather the imperialists for associating them with their empires
     for i in range(0,nimperialists):
-        empires[i] = np.insert(empires[i], 0, imperialists[i], axis=0)
-        empires_fitness[i] = np.insert(empires_fitness[i], 0, imperialist_fitness[i], axis=0)
-        empires_total_cost = np.append(empires_total_cost, empires_fitness[i][0] + zeta * np.mean(empires_fitness[i][1:]))
+        empires_total_cost = np.append(empires_total_cost, imperialists_fitness[i] + zeta * np.mean(colonies_fitness[i]))
 
-    return empires, empires_fitness, empires_total_cost
+    return imperialists, imperialists_fitness, new_colonies, new_colonies_fitness, empires_total_cost

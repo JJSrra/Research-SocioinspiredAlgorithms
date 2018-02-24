@@ -12,7 +12,7 @@ from ImperialisticCompetition import *
 
 def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
         revolution_rate=0.3, assimilation_coef=2, assimilation_angle_coef=0.5,
-        zeta=0.02, damp_ratio=0.99, stop_if_just_one_empire=False, uniting_threshold=0.02,
+        zeta=0.02, damp_ratio=0.99, stop_if_just_one_empire=False, uniting_threshold=0.8,
         lower_bound=0, upper_bound=10):
 
     # Zarib is used to prevent the weakest empire to have a probability of zero
@@ -34,29 +34,35 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
     initial_countries = initial_countries[order]
 
     # Initial empires are defined
-    empires, empires_fitness, empires_total_cost = CreateInitialEmpires(initial_countries, fitness, nimperialists, zeta)
+    imperialists, imperialists_fitness, colonies, colonies_fitness, empires_total_cost = CreateInitialEmpires(initial_countries,
+                                fitness, nimperialists, zeta)
 
     # Main loop
     for decade in range(0,decades):
         revolution_rate = damp_ratio*revolution_rate
 
-        for i in range(0,len(empires)):
+        for i in range(0,len(imperialists)):
             # Assimilation: movement of colonies towards imperialists (Assimilation Policy)
-            empires[i] = AssimilateColonies(empires[i], domain, assimilation_coef)
+            colonies[i] = AssimilateColonies(imperialists[i], colonies[i], domain, assimilation_coef)
 
             # Revolution: a sudden change in the socio-political characteristics
-            empires[i], empires_fitness[i], evals = RevolveColonies(empires[i],
-                                empires_fitness[i], domain, revolution_rate, CostFunction)
+            colonies[i], colonies_fitness[i] = RevolveColonies(colonies[i],
+                                colonies_fitness[i], domain, revolution_rate, CostFunction)
 
             # Empire posession: if a colony has a lower cost than its imperialist, they switch positions
-            empires[i], empires_fitness[i] = PosessEmpire(empires[i], empires_fitness[i])
+            imperialists[i], imperialists_fitness[i], colonies[i], colonies_fitness[i] = PosessEmpire(imperialists[i],
+                                imperialists_fitness[i], colonies[i], colonies_fitness[i])
 
             # Compute the current cost for each empire
-            empires_total_cost[i] = empires_fitness[i][0] + zeta * np.mean(empires_fitness[i][1:])
+            empires_total_cost[i] = imperialists_fitness[i] + zeta * np.mean(colonies_fitness[i])
 
         # Similar empires are merged into a bigger empire
-        empires, empires_fitness, empires_total_cost = UniteSimilarEmpires(empires, empires_fitness,
-                                empires_total_cost, domain, uniting_threshold)
+        imperialists, imperialists_fitness, colonies, colonies_fitness, empires_total_cost = UniteSimilarEmpires(imperialists,
+                                imperialists_fitness, colonies, colonies_fitness, empires_total_cost, domain, uniting_threshold, zeta)
 
         # The imperialistic competition takes place
-        empires, empires_fitness, empires_total_cost = ImperialisticCompetition(empires, empires_fitness, empires_total_cost)
+        imperialists, imperialists_fitness, colonies, colonies_fitness, empires_total_cost = ImperialisticCompetition(imperialists,
+                                imperialists_fitness, colonies, colonies_fitness, empires_total_cost)
+
+        if len(imperialists) == 1 and stop_if_just_one_empire:
+            break
