@@ -67,4 +67,4 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
         if len(imperialists) == 1 and stop_if_just_one_empire:
             break
 
-        print("Decade {}, best solution: {}".format(decade, min(imperialists_fitness)))
+        print("Decade {:4}, best solution: {:e}".format(decade, min(imperialists_fitness)))
