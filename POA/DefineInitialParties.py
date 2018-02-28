@@ -1,8 +1,20 @@
 import numpy as np
+from ChooseCandidates import *
 
-def DefineInitialParties(nparties, nmembers, ncandidates, dim, domain):
+def DefineInitialParties(CostFunction, nparties, nregularmembers, ncandidates, dim, domain):
     lower_bound, upper_bound = domain
-    total_members = nmembers + ncandidates
 
-    # All the parliament is created as solutions, and splitted into parties
-    parliament = np.random.uniform(lower_bound, upper_bound, nparties*total_members*dim).reshape(nparties, total_members, dim)
+    # First we create the regular members of each party; it has to be saved in a list
+    # because the size of the parties may vary in following steps of the algorithm
+    members = np.random.uniform(lower_bound, upper_bound, nparties*nregularmembers*dim).reshape(nparties, nregularmembers, dim)
+    members_fitness = np.apply_along_axis(CostFunction, 2, members)
+
+    # And now we generate N candidate spots for each party, and assign each party's best members to them
+    candidates = np.random.uniform(lower_bound, upper_bound, nparties*ncandidates*dim).reshape(nparties, ncandidates, dim)
+    candidates_fitness = np.apply_along_axis(CostFunction, 2, candidates)
+
+    for i in range(0,nparties):
+        candidates[i], candidates_fitness[i], members[i], members_fitness[i] = ChooseCandidates(candidates[i],
+                    candidates_fitness[i], members[i], members_fitness[i])
+
+    return candidates, candidates_fitness, members, members_fitness
