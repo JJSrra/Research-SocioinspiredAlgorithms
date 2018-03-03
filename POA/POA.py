@@ -3,6 +3,7 @@
 # Implemented by Juanjo Sierra
 
 from DefineInitialParties import *
+from IntraGroupCompetition import *
 
 def POA(CostFunction, dim=30, nparties=4, nmembers=5, ncandidates=2,
         lower_bound=0, upper_bound=10, max_iter=30000, merge_probability=0.01,
@@ -14,6 +15,14 @@ def POA(CostFunction, dim=30, nparties=4, nmembers=5, ncandidates=2,
 
     # Define the initial parties and candidates
     candidates, candidates_fitness, members, members_fitness = DefineInitialParties(CostFunction,
-                nparties, nmembers, ncandidates, dim, domain)
+                    nparties, nmembers, ncandidates, dim, domain)
 
-    while
+    iterations = 0
+
+    while iterations < max_iter:
+        for i in range(0,len(candidates)):
+            candidates[i], candidates_fitness[i], members[i], members_fitness[i] = IntraGroupCompetition(CostFunction,
+                    candidates[i], candidates_fitness[i], members[i], members_fitness[i], domain,
+                    bias, candidate_weighting, member_weighting)
+
+    ++iterations
