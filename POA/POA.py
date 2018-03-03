@@ -4,12 +4,16 @@
 
 from DefineInitialParties import *
 
-def POA(CostFunction, dim=30, nparties=10, nregularmembers=45, ncandidates=5,
-        lower_bound=0, upper_bound=10): # Any settings will be arguments of this function
+def POA(CostFunction, dim=30, nparties=4, nmembers=5, ncandidates=2,
+        lower_bound=0, upper_bound=10, max_iter=30000, merge_probability=0.01,
+        deletion_probability=0.001, bias=0.3, member_weighting=0.01,
+        candidate_weighting=1, gropus_to_merge=2, gropus_to_delete=1):
 
     # Domain of the function, tuple including lower and upper bounds
     domain = (lower_bound, upper_bound)
 
     # Define the initial parties and candidates
     candidates, candidates_fitness, members, members_fitness = DefineInitialParties(CostFunction,
-                nparties, nregularmembers, ncandidates, dim, domain)
+                nparties, nmembers, ncandidates, dim, domain)
+
+    while
