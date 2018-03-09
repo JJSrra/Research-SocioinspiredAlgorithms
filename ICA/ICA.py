@@ -12,7 +12,7 @@ from ImperialisticCompetition import *
 
 def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
         revolution_rate=0.3, assimilation_coef=2, assimilation_angle_coef=0.5,
-        zeta=0.02, damp_ratio=0.99, stop_if_just_one_empire=False, uniting_threshold=0.8,
+        zeta=0.02, damp_ratio=0.99, stop_if_just_one_empire=False, uniting_threshold=0.02,
         lower_bound=0, upper_bound=10):
 
     # Zarib is used to prevent the weakest empire to have a probability of zero
@@ -43,13 +43,17 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
 
         for i in range(0,len(imperialists)):
             # Assimilation: movement of colonies towards imperialists (Assimilation Policy)
-            colonies[i] = AssimilateColonies(imperialists[i], colonies[i], domain, assimilation_coef)
+            colonies[i], colonies_fitness[i] = AssimilateColonies(imperialists[i], colonies[i], domain, assimilation_coef, CostFunction)
+
+            # Empire posession: if a colony has a lower cost than its imperialist, they switch positions
+            imperialists[i], imperialists_fitness[i], colonies[i], colonies_fitness[i] = PosessEmpire(imperialists[i],
+                                imperialists_fitness[i], colonies[i], colonies_fitness[i])
 
             # Revolution: a sudden change in the socio-political characteristics
             colonies[i], colonies_fitness[i] = RevolveColonies(colonies[i],
                                 colonies_fitness[i], domain, revolution_rate, CostFunction)
 
-            # Empire posession: if a colony has a lower cost than its imperialist, they switch positions
+            # Empire posession again
             imperialists[i], imperialists_fitness[i], colonies[i], colonies_fitness[i] = PosessEmpire(imperialists[i],
                                 imperialists_fitness[i], colonies[i], colonies_fitness[i])
 

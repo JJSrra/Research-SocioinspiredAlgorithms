@@ -1,7 +1,7 @@
 import numpy as np
 import numpy.matlib
 
-def AssimilateColonies(imperialist, colonies, domain, assimilation_coef):
+def AssimilateColonies(imperialist, colonies, domain, assimilation_coef, CostFunction):
     lower_bound, upper_bound = domain
 
     # The imperialist position will have an impact in any colony movement
@@ -14,4 +14,7 @@ def AssimilateColonies(imperialist, colonies, domain, assimilation_coef):
     colonies = colonies + 2 * assimilation_coef * multiplier * vector
     colonies = np.clip(colonies, lower_bound, upper_bound)
 
-    return colonies
+    colonies_fitness = np.apply_along_axis(CostFunction, 1, colonies);
+
+
+    return colonies, colonies_fitness
