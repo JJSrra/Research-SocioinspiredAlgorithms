@@ -17,11 +17,12 @@ def POA(CostFunction, dim=30, nparties=4, nmembers=5, ncandidates=2,
     candidates, candidates_fitness, members, members_fitness = DefineInitialParties(CostFunction,
                     nparties, nmembers, ncandidates, dim, domain)
 
-    iterations = 0
+    iterations = 29999
+    group_power = np.zeros(nparties)
 
     while iterations < max_iter:
         for i in range(0,len(candidates)):
-            candidates[i], candidates_fitness[i], members[i], members_fitness[i] = IntraGroupCompetition(CostFunction,
+            candidates[i], candidates_fitness[i], members[i], members_fitness[i], group_power[i] = IntraGroupCompetition(CostFunction,
                     candidates[i], candidates_fitness[i], members[i], members_fitness[i], domain,
                     bias, candidate_weighting, member_weighting)
 

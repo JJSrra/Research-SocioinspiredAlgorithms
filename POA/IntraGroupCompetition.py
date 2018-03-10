@@ -26,4 +26,7 @@ def IntraGroupCompetition(CostFunction, candidates, candidates_fitness, members,
     # And then check if any new regular member deserves to be a candidate
     candidates, candidates_fitness, members, members_fitness = ChooseCandidates(candidates, candidates_fitness, members, members_fitness)
 
-    return candidates, candidates_fitness, members, members_fitness
+    # Finally, we compute the power of the group according to the formula in the paper
+    power = (candidate_weighting*np.mean(candidates_fitness) + member_weighting*np.mean(members_fitness)) / candidate_weighting+member_weighting
+
+    return candidates, candidates_fitness, members, members_fitness, power
