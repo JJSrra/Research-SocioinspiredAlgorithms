@@ -1,5 +1,6 @@
 import numpy as np
 import numpy.matlib
+from ChooseCandidates import *
 
 def IntraGroupCompetition(CostFunction, candidates, candidates_fitness, members, members_fitness, domain, bias, candidate_weighting, member_weighting):
     lower_bound, upper_bound = domain
@@ -21,5 +22,8 @@ def IntraGroupCompetition(CostFunction, candidates, candidates_fitness, members,
     change_index = np.where(new_fitness < members_fitness)
     members[change_index] = possible_changes[change_index]
     members_fitness[change_index] = new_fitness[change_index]
+
+    # And then check if any new regular member deserves to be a candidate
+    candidates, candidates_fitness, members, members_fitness = ChooseCandidates(candidates, candidates_fitness, members, members_fitness)
 
     return candidates, candidates_fitness, members, members_fitness

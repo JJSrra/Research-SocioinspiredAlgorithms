@@ -25,4 +25,4 @@ def POA(CostFunction, dim=30, nparties=4, nmembers=5, ncandidates=2,
                     candidates[i], candidates_fitness[i], members[i], members_fitness[i], domain,
                     bias, candidate_weighting, member_weighting)
 
-    ++iterations
+        iterations += 1
