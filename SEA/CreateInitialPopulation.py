@@ -7,6 +7,4 @@ def CreateInitialPopulation(CostFunction, nindividuals, dim, domain):
     population = np.random.uniform(lower_bound, upper_bound, nindividuals*dim).reshape(nindividuals, dim)
     population_fitness = np.apply_along_axis(CostFunction, 1, population)
 
-    print(population)
-    print("###############################################")
-    print(population_fitness)
+    return population, population_fitness
