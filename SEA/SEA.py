@@ -12,3 +12,6 @@ def SEA(CostFunction, dim=10, nindividuals=20, max_iter=500,
 
     # Create the first individuals
     population, population_fitness = CreateInitialPopulation(CostFunction, nindividuals, dim, domain)
+
+    # Create emotion indexes
+    emotion = np.ones(nindividuals)
