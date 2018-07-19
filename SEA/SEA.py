@@ -16,6 +16,7 @@ def SEA(CostFunction, dim=10, nindividuals=20, max_iter=500,
 
     # Create emotion indexes
     emotion = np.ones(nindividuals)
-    
+
     # First behaviour change
-    population = Manner1(population, k1, domain)
+    manner = Manner1(population, k1)
+    population = np.clip(population + manner, lower_bound, upper_bound)
