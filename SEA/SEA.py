@@ -3,9 +3,10 @@
 # Implemented by Juanjo Sierra
 
 from CreateInitialPopulation import *
+from Manners import Manner1
 
 def SEA(CostFunction, dim=10, nindividuals=20, max_iter=500,
-    lower_bound=0, upper_bound=10):
+    k1=0.01, lower_bound=0, upper_bound=10):
 
     # Domain of the function, tuple including lower and upper bounds
     domain = (lower_bound, upper_bound)
@@ -15,3 +16,6 @@ def SEA(CostFunction, dim=10, nindividuals=20, max_iter=500,
 
     # Create emotion indexes
     emotion = np.ones(nindividuals)
+    
+    # First behaviour change
+    population = Manner1(population, k1, domain)
