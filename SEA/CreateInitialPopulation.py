@@ -12,5 +12,5 @@ def CreateInitialPopulation(CostFunction, nindividuals, dim, domain):
     population_fitness = population_fitness[order]
     population = population[order]
 
-    # We return a second population as the current history of best position for each individual
-    return population, population_fitness, population
+    # We return a second population and fitness as the current history of best position for each individual
+    return population, population_fitness, population, population_fitness
