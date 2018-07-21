@@ -7,4 +7,10 @@ def CreateInitialPopulation(CostFunction, nindividuals, dim, domain):
     population = np.random.uniform(lower_bound, upper_bound, nindividuals*dim).reshape(nindividuals, dim)
     population_fitness = np.apply_along_axis(CostFunction, 1, population)
 
-    return population, population_fitness
+    # Reorder the population, best individuals first
+    order = np.argsort(population_fitness)
+    population_fitness = population_fitness[order]
+    population = population[order]
+
+    # We return a second population as the current history of best position for each individual
+    return population, population_fitness, population
