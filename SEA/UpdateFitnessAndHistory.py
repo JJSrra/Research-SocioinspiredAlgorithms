@@ -17,6 +17,7 @@ def UpdateFitnessAndHistory(CostFunction, population, population_fitness, histor
     # Adapt emotion index depending on global performance
     emotion[np.where(population_fitness <= former_best)] -= emotion_decrease
     emotion[np.where(population_fitness > former_best)] = 1.0
+    emotion = np.clip(emotion, 0, 1)
 
     # Replace every individual history whose current fitness is the best
     history_changes = np.where(population_fitness < history_fitness)
