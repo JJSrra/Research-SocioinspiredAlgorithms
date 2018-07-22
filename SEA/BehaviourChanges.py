@@ -1,7 +1,8 @@
 import numpy as np
 from Manners import Manner2, Manner3, Manner4
 
-def BehaviourChanges(population, population_fitness, history, status_best, emotion, lower_threshold, upper_threshold, k1, k2, k3):
+def BehaviourChanges(population, population_fitness, history, status_best, emotion, lower_threshold, upper_threshold, k1, k2, k3, domain):
+    lower_bound, upper_bound = domain
 
     # Select as 'bad population' individuals with emotion index lesser than lower threshold
     bad_population = np.where(emotion < lower_threshold)
@@ -27,4 +28,4 @@ def BehaviourChanges(population, population_fitness, history, status_best, emoti
         population[good_population] += np.array([Manner4(individual, individual_best, population, k1, k3) 
                 for (individual, individual_best) in zip(population[good_population], history[good_population])])
 
-    return population
+    return np.clip(population, lower_bound, upper_bound)
