@@ -29,6 +29,20 @@ def SEA(CostFunction, dim=10, nindividuals=20, max_iter=500,
 	population, population_fitness, history, history_fitness, emotion = UpdateFitnessAndHistory(CostFunction,
 			population, population_fitness, history, history_fitness, emotion, emotion_decrease)
 
+	# Update best global solution
+	status_best = history[np.argsort(history_fitness)[0]]
+
+	# Start iterations
 	for iteration in range(1, max_iter):
-		BehaviourChanges(population, population_fitness, history, history_fitness, emotion,
-				lower_threshold, upper_threshold, k1, k2, k3, domain)
+		# Change behaviours according to emotion indexes
+		population = BehaviourChanges(population, population_fitness, history, status_best, emotion,
+				lower_threshold, upper_threshold, k1, k2, k3)
+
+		# Update new positions, fitness and history
+		population, population_fitness, history, history_fitness, emotion = UpdateFitnessAndHistory(CostFunction,
+			population, population_fitness, history, history_fitness, emotion, emotion_decrease)
+
+		# Update best global solution
+		status_best = history[np.argsort(history_fitness)[0]]
+
+
