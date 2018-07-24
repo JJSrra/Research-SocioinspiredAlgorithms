@@ -26,7 +26,7 @@ def SEA(CostFunction, dim=10, nindividuals=20, max_iter=500,
 	population = np.clip(population + manner, lower_bound, upper_bound)
 
 	# Update new positions, fitness and history
-	population, population_fitness, history, history_fitness, emotion = UpdateFitnessAndHistory(CostFunction,
+	population_fitness, history, history_fitness, emotion = UpdateFitnessAndHistory(CostFunction,
 			population, population_fitness, history, history_fitness, emotion, emotion_decrease)
 
 	# Update best global solution
@@ -40,7 +40,7 @@ def SEA(CostFunction, dim=10, nindividuals=20, max_iter=500,
 				lower_threshold, upper_threshold, k1, k2, k3, domain)
 
 		# Update new positions, fitness and history
-		population, population_fitness, history, history_fitness, emotion = UpdateFitnessAndHistory(CostFunction,
+		population_fitness, history, history_fitness, emotion = UpdateFitnessAndHistory(CostFunction,
 			population, population_fitness, history, history_fitness, emotion, emotion_decrease)
 
 		# Update best global solution

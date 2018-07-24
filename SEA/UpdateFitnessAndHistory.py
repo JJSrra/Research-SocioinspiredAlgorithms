@@ -24,4 +24,4 @@ def UpdateFitnessAndHistory(CostFunction, population, population_fitness, histor
     history[history_changes] = population[history_changes]
     history_fitness[history_changes] = population_fitness[history_changes]
 
-    return population, population_fitness, history, history_fitness, emotion
+    return population_fitness, history, history_fitness, emotion
