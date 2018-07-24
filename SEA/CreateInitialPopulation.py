@@ -8,9 +8,9 @@ def CreateInitialPopulation(CostFunction, nindividuals, dim, domain):
     population_fitness = np.apply_along_axis(CostFunction, 1, population)
 
     # Reorder the population, best individuals first
-    order = np.argsort(population_fitness)
-    population_fitness = population_fitness[order]
-    population = population[order]
+    # order = np.argsort(population_fitness)
+    # population_fitness = population_fitness[order]
+    # population = population[order]
 
     # We return a second population and fitness as the current history of best position for each individual
     return population, population_fitness, population, population_fitness
