@@ -5,7 +5,7 @@
 from CreateInitialSociety import *
 
 def ASO(CostFunction, dim=10, nindividuals=20, max_iter=1000,
-    lower_bound=0, upper_bound=10):
+    external_threshold=0.5, internal_threshold=0.5, lower_bound=0, upper_bound=10):
 
     # Domain of the function, tuple including lower and upper bounds
 	domain = (lower_bound, upper_bound)
