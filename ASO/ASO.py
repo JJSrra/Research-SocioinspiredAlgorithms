@@ -4,9 +4,10 @@
 
 from CreateInitialSociety import *
 from CurrentMovementPolicy import CalculateFicklenessIndexes
+from SocietyMovementPolicy import CalculateExternalIrregularityIndexes
 
 def ASO(CostFunction, dim=10, nindividuals=20, max_iter=1000,
-    fickleness_rate=0.3, external_threshold=0.5, internal_threshold=0.5,
+    fickleness_rate=0.5, external_rate=4, external_threshold=0.5, internal_threshold=0.5,
 	lower_bound=0, upper_bound=10):
 
     # Domain of the function, tuple including lower and upper bounds
@@ -19,6 +20,9 @@ def ASO(CostFunction, dim=10, nindividuals=20, max_iter=1000,
 	# Start the main loop
 	iteration = 0
 	while iteration < max_iter:
+		global_best = np.min(history_fitness)
+
 		fickleness_indexes = CalculateFicklenessIndexes(society_fitness, history_fitness, fickleness_rate)
+		external_indexes = CalculateExternalIrregularityIndexes(society_fitness, global_best, external_rate)
 		
 		iteration += 1
