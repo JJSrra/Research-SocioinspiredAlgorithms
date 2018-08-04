@@ -5,7 +5,7 @@
 from CreateInitialSociety import *
 from CurrentMovementPolicy import CalculateFicklenessIndexes, GenerateCurrentMovementPolicy
 from SocietyMovementPolicy import CalculateExternalIrregularityIndexes, GenerateSocietyMovementPolicy
-from PreviousMovementPolicy import CalculateInternalIrregularityIndexes
+from PreviousMovementPolicy import CalculateInternalIrregularityIndexes, GeneratePreviousMovementPolicy
 
 def ASO(CostFunction, dim=10, nindividuals=20, max_iter=1000,
     fickleness_rate=0.5, external_rate=4, external_threshold=0.5,
@@ -36,5 +36,9 @@ def ASO(CostFunction, dim=10, nindividuals=20, max_iter=1000,
 		society_movement_positions = np.array([GenerateSocietyMovementPolicy(
 			individual, external_index, global_best, external_threshold, evolution_rate, domain)
 			for (individual, external_index) in zip(society, external_indexes)])
+
+		previous_movement_positions = np.array([GeneratePreviousMovementPolicy(
+			individual, internal_index, previous_best, internal_threshold, evolution_rate, domain)
+			for (individual, internal_index, previous_best) in zip(society, internal_indexes, history)])
 
 		iteration += 1
