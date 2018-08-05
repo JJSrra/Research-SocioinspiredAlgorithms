@@ -12,7 +12,7 @@ def GenerateSocietyMovementPolicy(individual, external_index, global_best, exter
     dim = len(individual)
 
     if external_index < external_threshold: 
-        mutation_multiplier = np.random.uniform(-1,1,10)
+        mutation_multiplier = np.random.uniform(-1,1,dim)
         mutation = evolution_rate * mutation_multiplier * (global_best - individual)
         return np.clip(individual + mutation, lower_bound, upper_bound)
     else:

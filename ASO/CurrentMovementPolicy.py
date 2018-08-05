@@ -14,7 +14,7 @@ def GenerateCurrentMovementPolicy(individual, fickleness_index, iteration_best, 
     dim = len(individual)
 
     if fickleness_index < fickleness_rate: 
-        mutation_multiplier = np.random.uniform(-1,1,10)
+        mutation_multiplier = np.random.uniform(-1,1,dim)
         mutation = evolution_rate * mutation_multiplier * (iteration_best - individual)
         return np.clip(individual + mutation, lower_bound, upper_bound)
     else:
