@@ -9,7 +9,7 @@ from PreviousMovementPolicy import CalculateInternalIrregularityIndexes, Generat
 from MovementPoliciesCombination import NewPositionsPolicyBased
 from UpdateHistory import *
 
-def ASO(CostFunction, dim=10, nindividuals=20, max_iter=1000,
+def ASO(CostFunction, dim=10, nindividuals=20, max_eval=10000,
     fickleness_rate=0.5, external_rate=4, external_threshold=0.5,
 	internal_rate=4, internal_threshold=0.5, evolution_rate=0.5,
 	lower_bound=0, upper_bound=10):
@@ -21,9 +21,11 @@ def ASO(CostFunction, dim=10, nindividuals=20, max_iter=1000,
 	society, society_fitness, history, history_fitness = CreateInitialSociety(CostFunction,
             nindividuals, dim, domain)
 
+	# Initial function evaluations are the same as society members
+	evaluations = nindividuals
+
 	# Start the main loop
-	iteration = 0
-	while iteration < max_iter:
+	while evaluations < max_eval:
 		global_best = np.min(history_fitness)
 		iteration_best = society[np.argsort(society_fitness)[0]]
 
@@ -43,10 +45,12 @@ def ASO(CostFunction, dim=10, nindividuals=20, max_iter=1000,
 			individual, internal_index, previous_best, internal_threshold, evolution_rate, domain)
 			for (individual, internal_index, previous_best) in zip(society, internal_indexes, history)])
 
-		society, society_fitness = NewPositionsPolicyBased(CostFunction, current_movement_positions, society_movement_positions, previous_movement_positions)
+		society, society_fitness, new_evaluations = NewPositionsPolicyBased(CostFunction, current_movement_positions, society_movement_positions, previous_movement_positions)
 		
 		history, history_fitness = UpdateHistory(society, society_fitness, history, history_fitness)
 
-		print("Iteration {:3}, best solution: {:e}".format(iteration, np.min(history_fitness)))
+		evaluations += new_evaluations
+		
+		#print("Iteration {:3}, best solution: {:e}".format(iteration, np.min(history_fitness)))
 
-		iteration += 1
+	return np.min(history_fitness)
