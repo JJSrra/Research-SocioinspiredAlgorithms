@@ -2,9 +2,7 @@ import numpy as np
 
 def ImperialisticCompetition(imperialists, imperialists_fitness, colonies, colonies_fitness, empires_total_cost):
     dim = len(colonies[0][0])
-    if np.random.rand() > 0.11:
-        return imperialists, imperialists_fitness, colonies, colonies_fitness, empires_total_cost
-
+    
     if len(imperialists) <= 1:
         return imperialists, imperialists_fitness, colonies, colonies_fitness, empires_total_cost
 
