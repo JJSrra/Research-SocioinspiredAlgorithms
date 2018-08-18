@@ -35,3 +35,5 @@ def POA(CostFunction, dim=10, nparties=4, nmembers=5, ncandidates=2,
 		# print("Iteration {:4}, best solution: {:e}".format(iterations, np.min(candidates_fitness)))
 
 		evaluations += new_evaluations
+
+	return np.min(candidates_fitness)
