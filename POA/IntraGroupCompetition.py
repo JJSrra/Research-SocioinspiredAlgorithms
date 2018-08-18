@@ -22,6 +22,7 @@ def IntraGroupCompetition(CostFunction, candidates, candidates_fitness, members,
     change_index = np.where(new_fitness < members_fitness)
     members[change_index] = possible_changes[change_index]
     members_fitness[change_index] = new_fitness[change_index]
+    new_evaluations = len(possible_changes)
 
     # And then check if any new regular member deserves to be a candidate
     candidates, candidates_fitness, members, members_fitness = ChooseCandidates(candidates, candidates_fitness, members, members_fitness)
@@ -29,4 +30,4 @@ def IntraGroupCompetition(CostFunction, candidates, candidates_fitness, members,
     # Finally, we compute the power of the group according to the formula in the paper
     power = (candidate_weighting*np.mean(candidates_fitness) + member_weighting*np.mean(members_fitness)) / candidate_weighting+member_weighting
 
-    return candidates, candidates_fitness, members, members_fitness, power
+    return candidates, candidates_fitness, members, members_fitness, power, new_evaluations
