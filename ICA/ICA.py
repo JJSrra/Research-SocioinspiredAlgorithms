@@ -12,7 +12,7 @@ from ImperialisticCompetition import *
 
 def ICA(CostFunction, dim=10, ncountries=200, nimperialists=8, decades=2000,
         evaluation_criteria=False, max_eval=10000, revolution_rate=0.3, assimilation_coef=2,
-        assimilation_angle_coef=0.5, zeta=0.1, damp_ratio=0.99, stop_if_just_one_empire=False,
+        assimilation_angle_coef=0.75, zeta=0.1, damp_ratio=0.99, stop_if_just_one_empire=False,
         uniting_threshold=0.02, lower_bound=0, upper_bound=10):
 
     # Zarib is used to prevent the weakest empire to have a probability of zero
