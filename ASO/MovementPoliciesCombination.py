@@ -12,7 +12,8 @@ def NewPositionsPolicyBased(CostFunction, current_policies, society_policies, pr
     results = np.array([SelectBestPolicy(CostFunction, current, society, previous)
 			for (current, society, previous) in zip(current_policies, society_policies, previous_policies)])
 
+    new_evaluations = 3 * len(current_policies) # All three policies has the same amount of members
     new_fitness = results[:, 0]
     new_positions = np.delete(results, 0, 1)
 
-    return new_positions, new_fitness
+    return new_positions, new_fitness, new_evaluations
