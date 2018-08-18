@@ -28,8 +28,10 @@ def SLC(CostFunction, max_eval=50000, dim=30, nteams=5, nmain=10, nsubs=10, lowe
         neval += evals_competition
         league_main,league_subs,fitness_main,fitness_subs = Takhsis(league_main,league_subs,fitness_main,fitness_subs)
 
-        print("Season {:4}, best solution: {:e}".format(it, fitness_main[0][0]))
-        print("\tNumber of evaluations: {}".format(neval))
+        # print("Season {:4}, best solution: {:e}".format(it, fitness_main[0][0]))
+        # print("\tNumber of evaluations: {}".format(neval))
 
-        if (neval > max_eval) or (fitness_main[0][0] == 0.0):
+        if neval > max_eval:
             break
+
+    return fitness_main[0][0]
