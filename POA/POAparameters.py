@@ -6,7 +6,7 @@ from POA import *
 if __name__ == "__main__":
     dim = 10
     repeats = 10
-    evaluations = 10*dim
+    evaluations = 10000*dim
     parties = 5
     members = 6
     candidates_list = [1,2,3]

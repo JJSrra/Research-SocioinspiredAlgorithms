@@ -6,7 +6,7 @@ from SLC import *
 if __name__ == "__main__":
     dim = 10
     repeats = 10
-    evaluations = 10*dim
+    evaluations = 10000*dim
     teams = 5
     main_players = 3
     sub_players = 3
