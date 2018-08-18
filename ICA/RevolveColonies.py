@@ -5,6 +5,7 @@ def RevolveColonies(colonies, colonies_fitness, domain, revolution_rate, CostFun
     # How many countries revolve depends on the revolution rate
     num_revolving_colonies = np.round(revolution_rate * len(colonies)).astype(int)
     dim = len(colonies[0])
+    new_evaluations = 0
 
     # We only have to make new positions and recalculate if there is at least one colony to revolve
     if (num_revolving_colonies > 0):
@@ -18,5 +19,6 @@ def RevolveColonies(colonies, colonies_fitness, domain, revolution_rate, CostFun
         # First 'num_revolving_colonies' are exchanged for their new positions
         colonies[0:num_revolving_colonies] = revolved_positions
         colonies_fitness[0:num_revolving_colonies] = np.apply_along_axis(CostFunction, 1, colonies[0:num_revolving_colonies])
+        new_evaluations = num_revolving_colonies
 
-    return colonies, colonies_fitness
+    return colonies, colonies_fitness, new_evaluations

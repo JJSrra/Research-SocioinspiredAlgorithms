@@ -10,10 +10,10 @@ from PosessEmpire import *
 from UniteSimilarEmpires import *
 from ImperialisticCompetition import *
 
-def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
-        revolution_rate=0.3, assimilation_coef=2, assimilation_angle_coef=0.5,
-        zeta=0.02, damp_ratio=0.99, stop_if_just_one_empire=False, uniting_threshold=0.02,
-        lower_bound=0, upper_bound=10):
+def ICA(CostFunction, dim=10, ncountries=200, nimperialists=8, decades=2000,
+        evaluation_criteria=False, max_eval=10000, revolution_rate=0.3, assimilation_coef=2,
+        assimilation_angle_coef=0.5, zeta=0.1, damp_ratio=0.99, stop_if_just_one_empire=False,
+        uniting_threshold=0.02, lower_bound=0, upper_bound=10):
 
     # Zarib is used to prevent the weakest empire to have a probability of zero
     zarib = 1.05
@@ -24,9 +24,13 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
 
     # Generation of the initial countries
     initial_countries = GenerateNewCountries(ncountries, dim, domain)
-
+    
     # New countries' cost/fitness is calculated
     fitness = np.apply_along_axis(CostFunction, 1, initial_countries)
+    
+    # Get initial evaluations if evaluations criteria is active
+    if evaluation_criteria:
+        evaluations = len(fitness)
 
     # And now the countries get sorted by their fitness
     order = np.argsort(fitness)
@@ -37,20 +41,23 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
     imperialists, imperialists_fitness, colonies, colonies_fitness, empires_total_cost = CreateInitialEmpires(initial_countries,
                                 fitness, nimperialists, zeta)
 
+    current_decade = 0
+
     # Main loop
-    for decade in range(0,decades):
+    while (evaluation_criteria and (evaluations < max_eval)) or (not evaluation_criteria and (current_decade < decades)):
         revolution_rate = damp_ratio*revolution_rate
 
         for i in range(0,len(imperialists)):
             # Assimilation: movement of colonies towards imperialists (Assimilation Policy)
-            colonies[i], colonies_fitness[i] = AssimilateColonies(imperialists[i], colonies[i], domain, assimilation_coef, CostFunction)
+            colonies[i], colonies_fitness[i], assimilation_evaluations = AssimilateColonies(imperialists[i],
+                                colonies[i], domain, assimilation_coef, CostFunction)
 
             # Empire posession: if a colony has a lower cost than its imperialist, they switch positions
             imperialists[i], imperialists_fitness[i], colonies[i], colonies_fitness[i] = PosessEmpire(imperialists[i],
                                 imperialists_fitness[i], colonies[i], colonies_fitness[i])
 
             # Revolution: a sudden change in the socio-political characteristics
-            colonies[i], colonies_fitness[i] = RevolveColonies(colonies[i],
+            colonies[i], colonies_fitness[i], revolution_evaluations = RevolveColonies(colonies[i],
                                 colonies_fitness[i], domain, revolution_rate, CostFunction)
 
             # Empire posession again
@@ -71,4 +78,12 @@ def ICA(CostFunction, dim=30, ncountries=200, nimperialists=8, decades=2000,
         if len(imperialists) == 1 and stop_if_just_one_empire:
             break
 
-        print("Decade {:4}, best solution: {:e}".format(decade, min(imperialists_fitness)))
+        if evaluation_criteria:
+            new_evaluations = assimilation_evaluations + revolution_evaluations
+            evaluations += new_evaluations
+        else:
+            current_decade += 1
+
+        #print("Decade {:4}, best solution: {:e}".format(decade, min(imperialists_fitness)))
+
+    return min(imperialists_fitness)

@@ -15,6 +15,6 @@ def AssimilateColonies(imperialist, colonies, domain, assimilation_coef, CostFun
     colonies = np.clip(colonies, lower_bound, upper_bound)
 
     colonies_fitness = np.apply_along_axis(CostFunction, 1, colonies);
+    new_evaluations = len(colonies)
 
-
-    return colonies, colonies_fitness
+    return colonies, colonies_fitness, new_evaluations
