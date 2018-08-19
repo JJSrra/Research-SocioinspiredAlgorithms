@@ -5,6 +5,7 @@ def UpdateFitnessAndHistory(CostFunction, population, population_fitness, histor
 
     # Compute new fitness for the new population
     population_fitness = np.apply_along_axis(CostFunction, 1, population)
+    new_evaluations = len(population)
 
     # Reorder population, history and emotions
     # order = np.argsort(population_fitness)
@@ -24,4 +25,4 @@ def UpdateFitnessAndHistory(CostFunction, population, population_fitness, histor
     history[history_changes] = population[history_changes]
     history_fitness[history_changes] = population_fitness[history_changes]
 
-    return population_fitness, history, history_fitness, emotion
+    return population_fitness, history, history_fitness, emotion, new_evaluations
