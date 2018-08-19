@@ -18,7 +18,7 @@ if __name__ == "__main__":
         for revolution_rate in revolution_rates:
             time1 = time.time()
             results = np.array([ICA(f1, dim=dim, evaluation_criteria=True, max_eval=evaluations,
-                ncountries=30, nimperialists=imperialists, revolution_rate=revolution_rate,
+                ncountries=countries, nimperialists=imperialists, revolution_rate=revolution_rate,
                 lower_bound=-100, upper_bound=100) for _ in range(repeats)])
             total_time = time.time() - time1
             print("Imperialists: {}\tRevolution rate: {}".format(imperialists, revolution_rate))
