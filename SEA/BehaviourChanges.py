@@ -15,7 +15,6 @@ def BehaviourChanges(population, population_fitness, history, status_best, emoti
 
     # Perform appropriate change to bad population
     if len(bad_population):
-        print(bad_population)
         population[bad_population] += np.array([Manner2(individual, status_best, k2) 
                 for individual in population[bad_population]])
 
