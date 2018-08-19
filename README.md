@@ -6,7 +6,7 @@ Research and statistic study on some Socioinspired Algorithms for my bachelor's 
 
 I will be uploading source code from each one of them as I implement them. At the end, there will be 6 algorithms:
 - Soccer League Competition (SLC)
-- Ideology Algorithm (IA)
+- [Ideology Algorithm (IA)](https://github.com/JJSrra/IdeologyAlgorithm)
 - Anarchic Society Optimization (ASO)
 - Parliamentary Political Competitions (POA)
 - Imperialist Competitive Algorithm (ICA)
