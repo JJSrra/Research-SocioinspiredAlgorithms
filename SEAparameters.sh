@@ -1,16 +1,16 @@
 #!/bin/bash
 #
 # The name of the job, can be whatever makes sense to you
-#SBATCH -J param-est-SEA
+#SBATCH -J SEA-param
 
 # The job should be placed into the queue 'larga'.
 #SBATCH -p larga
 
 # Redirect output stream to this file.
-#SBATCH -o param-est-SEA.dat
+#SBATCH -o SEA-param.dat
 
 # Redirect error stream to this file.
-#SBATCH -e param-est-SEA-err.dat
+#SBATCH -e SEA-param-err.dat
 
 #_______________________________________________________________________________
 

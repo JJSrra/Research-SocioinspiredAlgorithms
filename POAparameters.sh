@@ -1,16 +1,16 @@
 #!/bin/bash
 #
 # The name of the job, can be whatever makes sense to you
-#SBATCH -J param-est-POA
+#SBATCH -J POA-param
 
 # The job should be placed into the queue 'larga'.
 #SBATCH -p larga
 
 # Redirect output stream to this file.
-#SBATCH -o param-est-POA.dat
+#SBATCH -o POA-param.dat
 
 # Redirect error stream to this file.
-#SBATCH -e param-est-POA-err.dat
+#SBATCH -e POA-param-err.dat
 
 #_______________________________________________________________________________
 
