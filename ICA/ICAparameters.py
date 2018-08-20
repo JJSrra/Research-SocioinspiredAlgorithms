@@ -11,6 +11,8 @@ if __name__ == "__main__":
     imperialists_list = [3,4,5,6]
     revolution_rates = [0.2,0.3,0.4]
 
+    np.random.seed(10)
+
     f1 = optproblems.cec2005.F1(dim)
     print("F1: Shifted Sphere Function\n")
 
@@ -26,6 +28,8 @@ if __name__ == "__main__":
             print("_______________________________________________")
 
     print("###############################################")
+
+    np.random.seed(10)   
     
     f6 = optproblems.cec2005.F6(dim)
     print("F6: Shifted Rosenbrock’s Function\n")
@@ -43,6 +47,8 @@ if __name__ == "__main__":
 
     print("###############################################")
 
+    np.random.seed(10)
+
     f14 = optproblems.cec2005.F14(dim)
     print("F14: Shifted Rotated Expanded Scaffer’s F6\n")
 
@@ -58,6 +64,8 @@ if __name__ == "__main__":
             print("_______________________________________________")
 
     print("###############################################")
+
+    np.random.seed(10)
 
     f15 = optproblems.cec2005.F15(dim)
     print("F15: Hybrid Composition Function\n")
