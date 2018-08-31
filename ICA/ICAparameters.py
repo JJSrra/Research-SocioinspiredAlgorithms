@@ -1,4 +1,4 @@
-import optproblems.cec2005
+import cec2014
 import numpy as np
 import time
 from ICA import *
@@ -13,8 +13,10 @@ if __name__ == "__main__":
 
     np.random.seed(10)
 
-    f1 = optproblems.cec2005.F1(dim)
-    print("F1: Shifted Sphere Function\n")
+    def f1(x):
+        return cec2014.cec14(x,1)
+    
+    print("F1: Rotated High Conditioned Elliptic Function\n")
 
     for imperialists in imperialists_list:
         for revolution_rate in revolution_rates:
@@ -31,13 +33,15 @@ if __name__ == "__main__":
 
     np.random.seed(10)   
     
-    f6 = optproblems.cec2005.F6(dim)
-    print("F6: Shifted Rosenbrock’s Function\n")
+    def f4(x):
+        return cec2014.cec14(x,4)
+    
+    print("F4: Shifted and Rotated Rosenbrock’s Function\n")
 
     for imperialists in imperialists_list:
         for revolution_rate in revolution_rates:
             time1 = time.time()
-            results = np.array([ICA(f6, dim=dim, evaluation_criteria=True, max_eval=evaluations,
+            results = np.array([ICA(f4, dim=dim, evaluation_criteria=True, max_eval=evaluations,
                 ncountries=countries, nimperialists=imperialists, revolution_rate=revolution_rate,
                 lower_bound=-100, upper_bound=100) for _ in range(repeats)])
             total_time = time.time() - time1
@@ -49,13 +53,15 @@ if __name__ == "__main__":
 
     np.random.seed(10)
 
-    f14 = optproblems.cec2005.F14(dim)
-    print("F14: Shifted Rotated Expanded Scaffer’s F6\n")
+    def f17(x):
+        return cec2014.cec14(x,17)
+    
+    print("F17: Hybrid Function 1 (N=3)\n")
 
     for imperialists in imperialists_list:
         for revolution_rate in revolution_rates:
             time1 = time.time()
-            results = np.array([ICA(f14, dim=dim, evaluation_criteria=True, max_eval=evaluations,
+            results = np.array([ICA(f17, dim=dim, evaluation_criteria=True, max_eval=evaluations,
                 ncountries=countries, nimperialists=imperialists, revolution_rate=revolution_rate,
                 lower_bound=-100, upper_bound=100) for _ in range(repeats)])
             total_time = time.time() - time1
@@ -67,13 +73,15 @@ if __name__ == "__main__":
 
     np.random.seed(10)
 
-    f15 = optproblems.cec2005.F15(dim)
-    print("F15: Hybrid Composition Function\n")
+    def f23(x):
+        return cec2014.cec14(x,23)
+    
+    print("F23: Composition Function 1 (N=5)\n")
 
     for imperialists in imperialists_list:
         for revolution_rate in revolution_rates:
             time1 = time.time()
-            results = np.array([ICA(f1, dim=dim, evaluation_criteria=True, max_eval=evaluations,
+            results = np.array([ICA(f23, dim=dim, evaluation_criteria=True, max_eval=evaluations,
                 ncountries=countries, nimperialists=imperialists, revolution_rate=revolution_rate,
                 lower_bound=-5, upper_bound=5) for _ in range(repeats)])
             total_time = time.time() - time1
