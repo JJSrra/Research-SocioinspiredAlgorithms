@@ -135,7 +135,8 @@ if __name__ == "__main__":
     time1 = time.time()
     results = np.array([ICA(f25, dim=dim, evaluation_criteria=True,
         max_eval=evaluations, ncountries=countries, nimperialists=imperialists,
-        lower_bound=-999999, upper_bound=999999) for _ in range(repeats)])
+        lower_bound=-100, upper_bound=100, initial_population_lower_bound=2,
+        initial_population_upper_bound=5) for _ in range(repeats)])
     total_time = time.time() - time1
 
     means = results.mean(axis=0)
