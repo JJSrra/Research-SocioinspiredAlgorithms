@@ -1,7 +1,7 @@
 import numpy as np
 from GenerateNewCountries import *
 
-def RevolveColonies(colonies, colonies_fitness, domain, revolution_rate, CostFunction):
+def RevolveColonies(colonies, colonies_fitness, domain, initial_domain, revolution_rate, CostFunction):
     # How many countries revolve depends on the revolution rate
     num_revolving_colonies = np.round(revolution_rate * len(colonies)).astype(int)
     dim = len(colonies[0])
@@ -10,7 +10,7 @@ def RevolveColonies(colonies, colonies_fitness, domain, revolution_rate, CostFun
     # We only have to make new positions and recalculate if there is at least one colony to revolve
     if (num_revolving_colonies > 0):
         # Revolved colonies' positions are generated as new countries
-        revolved_positions = GenerateNewCountries(num_revolving_colonies, dim, domain)
+        revolved_positions = GenerateNewCountries(num_revolving_colonies, dim, domain, initial_domain)
 
         randperm = np.random.permutation(len(colonies))
         colonies = colonies[randperm]
