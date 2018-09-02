@@ -137,7 +137,8 @@ if __name__ == "__main__":
     time1 = time.time()
     results = np.array([SEA(f25, dim=dim, max_eval=evaluations,
         nindividuals=individuals, k1=k1, k2=k2, k3=k3,
-        lower_bound=-999999, upper_bound=999999) for _ in range(repeats)])
+        lower_bound=-10, upper_bound=10, initial_population_lower_bound=2,
+        initial_population_upper_bound=5) for _ in range(repeats)])
     total_time = time.time() - time1
 
     means = results.mean(axis=0)
