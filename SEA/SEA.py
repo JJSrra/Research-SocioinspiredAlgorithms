@@ -9,14 +9,16 @@ from BehaviourChanges import *
 
 def SEA(CostFunction, dim=10, nindividuals=20, max_eval=10000,
 	k1=0.01, k2=0.02, k3=0.03, emotion_decrease=0.05, lower_threshold=0.3,
-	upper_threshold=0.6, lower_bound=0, upper_bound=10):
+	upper_threshold=0.6, lower_bound=0, upper_bound=10,
+	initial_population_lower_bound=None, initial_population_upper_bound=None):
 
 	# Domain of the function, tuple including lower and upper bounds
 	domain = (lower_bound, upper_bound)
+	initial_domain = (initial_population_lower_bound, initial_population_upper_bound)
 
 	# Create the first individuals
 	population, population_fitness, history, history_fitness = CreateInitialPopulation(CostFunction,
-			nindividuals, dim, domain)
+			nindividuals, dim, domain, initial_domain)
 
 	# Initial evaluations (history evaluations don't count)
 	evaluations = nindividuals
