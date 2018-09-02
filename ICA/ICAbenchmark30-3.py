@@ -34,13 +34,13 @@ if __name__ == "__main__":
     max_sol = np.max(solutions)
     marks = means[0:-1]
 
-    with open("results/ICA-results-10-3.txt", "w") as file:
+    with open("results/ICA-results-30-3.txt", "w") as file:
         print("F3: Shifted Rotated High Conditioned Elliptic Function", file=file)
         print("Min\t Max\t Mean\t Mean time", file=file)
         print("_______________________________________________", file=file)
         print("{} {} {} {}".format(min_sol, max_sol, mean_best, total_time / repeats), file=file)
 
-    with open("convergence/ICA-convergence-10-3.csv", "w") as file:
+    with open("convergence/ICA-convergence-30-3.csv", "w") as file:
         for i in range(len(marks)):
             print("{},{}".format(10000*i, marks[i]), file=file)
 
@@ -61,14 +61,14 @@ if __name__ == "__main__":
     max_sol = np.max(solutions)
     marks = means[0:-1]
 
-    with open("results/ICA-results-10-8.txt", "w") as file:
+    with open("results/ICA-results-30-8.txt", "w") as file:
         print("F8: Shifted Rotated Ackley's Function with Global Optimum on Bounds", file=file)
         print("Min\t Max\t Mean\t Mean time", file=file)
         print("_______________________________________________", file=file)
         print("{} {} {} {}".format(min_sol, max_sol, mean_best, total_time / repeats), file=file)
 
 
-    with open("convergence/ICA-convergence-10-8.csv", "w") as file:
+    with open("convergence/ICA-convergence-30-8.csv", "w") as file:
         for i in range(len(marks)):
             print("{},{}".format(10000*i, marks[i]), file=file)
 
@@ -89,14 +89,14 @@ if __name__ == "__main__":
     max_sol = np.max(solutions)
     marks = means[0:-1]
 
-    with open("results/ICA-results-10-11.txt", "w") as file:
+    with open("results/ICA-results-30-11.txt", "w") as file:
         print("F11: Shifted Rotated Weierstrass Function", file=file)
         print("Min\t Max\t Mean\t Mean time", file=file)
         print("_______________________________________________", file=file)
         print("{} {} {} {}".format(min_sol, max_sol, mean_best, total_time / repeats), file=file)
 
 
-    with open("convergence/ICA-convergence-10-11.csv", "w") as file:
+    with open("convergence/ICA-convergence-30-11.csv", "w") as file:
         for i in range(len(marks)):
             print("{},{}".format(10000*i, marks[i]), file=file)
 
@@ -117,14 +117,14 @@ if __name__ == "__main__":
     max_sol = np.max(solutions)
     marks = means[0:-1]
 
-    with open("results/ICA-results-10-19.txt", "w") as file:
+    with open("results/ICA-results-30-19.txt", "w") as file:
         print("F19: Rotated Hybrid Composition Function with a Narrow Basin for the Global Optimum", file=file)
         print("Min\t Max\t Mean\t Mean time", file=file)
         print("_______________________________________________", file=file)
         print("{} {} {} {}".format(min_sol, max_sol, mean_best, total_time / repeats), file=file)
 
 
-    with open("convergence/ICA-convergence-10-19.csv", "w") as file:
+    with open("convergence/ICA-convergence-30-19.csv", "w") as file:
         for i in range(len(marks)):
             print("{},{}".format(10000*i, marks[i]), file=file)
 
@@ -145,13 +145,13 @@ if __name__ == "__main__":
     max_sol = np.max(solutions)
     marks = means[0:-1]
 
-    with open("results/ICA-results-10-20.txt", "w") as file:
+    with open("results/ICA-results-30-20.txt", "w") as file:
         print("F20: Rotated Hybrid Composition Function with the Global Optimum on the Bounds", file=file)
         print("Min\t Max\t Mean\t Mean time", file=file)
         print("_______________________________________________", file=file)
         print("{} {} {} {}".format(min_sol, max_sol, mean_best, total_time / repeats), file=file)
 
 
-    with open("convergence/ICA-convergence-10-20.csv", "w") as file:
+    with open("convergence/ICA-convergence-30-20.csv", "w") as file:
         for i in range(len(marks)):
             print("{},{}".format(10000*i, marks[i]), file=file)

@@ -34,13 +34,13 @@ if __name__ == "__main__":
     max_sol = np.max(solutions)
     marks = means[0:-1]
 
-    with open("results/ICA-results-10-2.txt", "w") as file:
+    with open("results/ICA-results-30-2.txt", "w") as file:
         print("F2: Shifted Schwefel's Problem 1.2", file=file)
         print("Min\t Max\t Mean\t Mean time", file=file)
         print("_______________________________________________", file=file)
         print("{} {} {} {}".format(min_sol, max_sol, mean_best, total_time / repeats), file=file)
 
-    with open("convergence/ICA-convergence-10-2.csv", "w") as file:
+    with open("convergence/ICA-convergence-30-2.csv", "w") as file:
         for i in range(len(marks)):
             print("{},{}".format(10000*i, marks[i]), file=file)
 
@@ -61,14 +61,14 @@ if __name__ == "__main__":
     max_sol = np.max(solutions)
     marks = means[0:-1]
 
-    with open("results/ICA-results-10-7.txt", "w") as file:
+    with open("results/ICA-results-30-7.txt", "w") as file:
         print("F7: Shifted Rotated Griewank's Function without Bounds", file=file)
         print("Min\t Max\t Mean\t Mean time", file=file)
         print("_______________________________________________", file=file)
         print("{} {} {} {}".format(min_sol, max_sol, mean_best, total_time / repeats), file=file)
 
 
-    with open("convergence/ICA-convergence-10-7.csv", "w") as file:
+    with open("convergence/ICA-convergence-30-7.csv", "w") as file:
         for i in range(len(marks)):
             print("{},{}".format(10000*i, marks[i]), file=file)
 
@@ -89,14 +89,14 @@ if __name__ == "__main__":
     max_sol = np.max(solutions)
     marks = means[0:-1]
 
-    with open("results/ICA-results-10-13.txt", "w") as file:
+    with open("results/ICA-results-30-13.txt", "w") as file:
         print("F13: Expanded Extended Griewank's plus Rosenbrock's Function (F8F2)", file=file)
         print("Min\t Max\t Mean\t Mean time", file=file)
         print("_______________________________________________", file=file)
         print("{} {} {} {}".format(min_sol, max_sol, mean_best, total_time / repeats), file=file)
 
 
-    with open("convergence/ICA-convergence-10-13.csv", "w") as file:
+    with open("convergence/ICA-convergence-30-13.csv", "w") as file:
         for i in range(len(marks)):
             print("{},{}".format(10000*i, marks[i]), file=file)
 
@@ -117,14 +117,14 @@ if __name__ == "__main__":
     max_sol = np.max(solutions)
     marks = means[0:-1]
 
-    with open("results/ICA-results-10-17.txt", "w") as file:
+    with open("results/ICA-results-30-17.txt", "w") as file:
         print("F17: Rotated Hybrid Composition Function with Noise in Fitness", file=file)
         print("Min\t Max\t Mean\t Mean time", file=file)
         print("_______________________________________________", file=file)
         print("{} {} {} {}".format(min_sol, max_sol, mean_best, total_time / repeats), file=file)
 
 
-    with open("convergence/ICA-convergence-10-17.csv", "w") as file:
+    with open("convergence/ICA-convergence-30-17.csv", "w") as file:
         for i in range(len(marks)):
             print("{},{}".format(10000*i, marks[i]), file=file)
 
@@ -145,13 +145,13 @@ if __name__ == "__main__":
     max_sol = np.max(solutions)
     marks = means[0:-1]
 
-    with open("results/ICA-results-10-18.txt", "w") as file:
+    with open("results/ICA-results-30-18.txt", "w") as file:
         print("F18: Rotated Hybrid Composition Function", file=file)
         print("Min\t Max\t Mean\t Mean time", file=file)
         print("_______________________________________________", file=file)
         print("{} {} {} {}".format(min_sol, max_sol, mean_best, total_time / repeats), file=file)
 
 
-    with open("convergence/ICA-convergence-10-18.csv", "w") as file:
+    with open("convergence/ICA-convergence-30-18.csv", "w") as file:
         for i in range(len(marks)):
             print("{},{}".format(10000*i, marks[i]), file=file)
