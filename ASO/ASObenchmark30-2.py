@@ -51,9 +51,10 @@ if __name__ == "__main__":
     f7 = optproblems.cec2005.F7(dim)
 
     time1 = time.time()
-    results = np.array([ASO(f1, dim=dim, max_eval=evaluations, external_rate=external_rate,
+    results = np.array([ASO(f7, dim=dim, max_eval=evaluations, external_rate=external_rate,
         internal_rate=internal_rate, lower_bound=-999999, upper_bound=999999,
-        fickleness_rate=fickleness_rate) for _ in range(repeats)])
+        fickleness_rate=fickleness_rate, initial_population_lower_bound=0,
+        initial_population_upper_bound=600) for _ in range(repeats)])
     total_time = time.time() - time1
 
     means = results.mean(axis=0)
