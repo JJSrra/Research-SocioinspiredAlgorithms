@@ -109,7 +109,7 @@ if __name__ == "__main__":
     time1 = time.time()
     results = np.array([SEA(f19, dim=dim, max_eval=evaluations,
         nindividuals=individuals, k1=k1, k2=k2, k3=k3,
-        lower_bound=-19, upper_bound=19) for _ in range(repeats)])
+        lower_bound=-5, upper_bound=5) for _ in range(repeats)])
     total_time = time.time() - time1
 
     means = results.mean(axis=0)
