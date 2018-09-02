@@ -51,7 +51,7 @@ if __name__ == "__main__":
     time1 = time.time()
     results = np.array([ICA(f7, dim=dim, evaluation_criteria=True,
         max_eval=evaluations, ncountries=countries, nimperialists=imperialists,
-        lower_bound=float("-inf"), upper_bound=float("inf")) for _ in range(repeats)])
+        lower_bound=-999999, upper_bound=999999) for _ in range(repeats)])
     total_time = time.time() - time1
 
     means = results.mean(axis=0)
