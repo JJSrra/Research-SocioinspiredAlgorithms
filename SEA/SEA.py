@@ -37,6 +37,9 @@ def SEA(CostFunction, dim=10, nindividuals=20, max_eval=10000,
 	# Update best global solution
 	status_best = history[np.argsort(history_fitness)[0]]
 
+	evaluations_marker = 0
+	evaluation_marks = np.array([])
+
 	# Start iterations
 	while evaluations < max_eval:
 		# Change behaviours according to emotion indexes
@@ -52,7 +55,11 @@ def SEA(CostFunction, dim=10, nindividuals=20, max_eval=10000,
 		# Update best global solution
 		status_best = history[np.argsort(history_fitness)[0]]
 
+		if evaluations >= evaluations_marker:
+			evaluation_marks = np.insert(evaluation_marks, len(evaluation_marks), np.min(history_fitness))
+			evaluations_marker += max_eval / 10
+
 		# print("Iteration {:3}, best solution: {:e}".format(iteration, np.min(history_fitness)))
 
-	return np.min(history_fitness)
+	return np.append(evaluation_marks, np.min(history_fitness))
 
