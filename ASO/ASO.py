@@ -12,14 +12,16 @@ from UpdateHistory import *
 def ASO(CostFunction, dim=10, nindividuals=20, max_eval=10000,
     fickleness_rate=0.5, external_rate=4, external_threshold=0.5,
 	internal_rate=4, internal_threshold=0.5, evolution_rate=0.5,
-	lower_bound=0, upper_bound=10):
+	lower_bound=0, upper_bound=10, initial_population_lower_bound=None,
+	initial_population_upper_bound=None):
 
     # Domain of the function, tuple including lower and upper bounds
 	domain = (lower_bound, upper_bound)
+	initial_domain = (initial_population_lower_bound, initial_population_upper_bound)
 
     # Create the initial society
 	society, society_fitness, history, history_fitness = CreateInitialSociety(CostFunction,
-            nindividuals, dim, domain)
+            nindividuals, dim, domain, initial_domain)
 
 	# Initial function evaluations are the same as society members
 	evaluations = nindividuals
