@@ -136,7 +136,7 @@ if __name__ == "__main__":
 
     time1 = time.time()
     results = np.array([ASO(f25, dim=dim, max_eval=evaluations, external_rate=external_rate,
-        internal_rate=internal_rate, lower_bound=-100, upper_bound=100,
+        internal_rate=internal_rate, lower_bound=-10, upper_bound=10,
         fickleness_rate=fickleness_rate, initial_population_lower_bound=2,
         initial_population_upper_bound=5) for _ in range(repeats)])
     total_time = time.time() - time1

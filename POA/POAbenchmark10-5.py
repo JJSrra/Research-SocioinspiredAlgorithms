@@ -25,8 +25,8 @@ if __name__ == "__main__":
 
     time1 = time.time()
     results = np.array([POA(f25, dim=dim, max_eval=evaluations, nparties=parties,
-        nmembers=members, ncandidates=candidates, lower_bound=-100,
-        upper_bound=100, initial_population_lower_bound=2,
+        nmembers=members, ncandidates=candidates, lower_bound=-10,
+        upper_bound=10, initial_population_lower_bound=2,
         initial_population_upper_bound=5) for _ in range(repeats)])
     total_time = time.time() - time1
 
