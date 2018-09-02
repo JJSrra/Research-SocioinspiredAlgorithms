@@ -24,6 +24,9 @@ def ASO(CostFunction, dim=10, nindividuals=20, max_eval=10000,
 	# Initial function evaluations are the same as society members
 	evaluations = nindividuals
 
+	evaluations_marker = 0
+	evaluation_marks = np.array([])
+
 	# Start the main loop
 	while evaluations < max_eval:
 		global_best = np.min(history_fitness)
@@ -50,7 +53,11 @@ def ASO(CostFunction, dim=10, nindividuals=20, max_eval=10000,
 		history, history_fitness = UpdateHistory(society, society_fitness, history, history_fitness)
 
 		evaluations += new_evaluations
+
+		if evaluations >= evaluations_marker:
+			evaluation_marks = np.insert(evaluation_marks, len(evaluation_marks), np.min(history_fitness))
+			evaluations_marker += max_eval / 10
 		
 		#print("Iteration {:3}, best solution: {:e}".format(iteration, np.min(history_fitness)))
 
-	return np.min(history_fitness)
+	return np.append(evaluation_marks, np.min(history_fitness))
