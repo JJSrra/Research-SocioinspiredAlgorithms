@@ -8,14 +8,16 @@ from Competition import *
 from Takhsis import *
 
 def SLC(CostFunction, max_eval=50000, dim=30, nteams=5, nmain=10, nsubs=10, lower_bound=0,
-		upper_bound=10, max_it=10**8, mutation_probability=0.1, mutation_rate=0.2):
+		upper_bound=10, max_it=10**8, mutation_probability=0.1, mutation_rate=0.2,
+		initial_population_lower_bound=None, initial_population_upper_bound=None):
 
 	# Domain of the problem, tuple including lower and upper bounds
 	domain = (lower_bound, upper_bound)
+	initial_domain = (initial_population_lower_bound, initial_population_upper_bound)
 
 	# Creation of the initial league
 	league_main,league_subs,fitness_main,fitness_subs,initial_evals = CreateInitialLeague(CostFunction,
-				nteams, nmain, nsubs, dim, domain)
+				nteams, nmain, nsubs, dim, domain, initial_domain)
 
 	# Starting number of evaluations
 	neval = initial_evals
