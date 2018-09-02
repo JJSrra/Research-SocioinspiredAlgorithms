@@ -8,8 +8,9 @@ if __name__ == "__main__":
     dim = 30
     repeats = 10
     evaluations = 10000*dim
-    countries = 30
-    imperialists = 6
+    parties = 6
+    members = 5
+    candidates = 2
 
     if not os.path.exists('results'):
         os.makedirs('results')
