@@ -21,6 +21,9 @@ def POA(CostFunction, dim=10, nparties=4, nmembers=5, ncandidates=2,
 	evaluations = nparties * nmembers
 	group_power = np.zeros(nparties)
 
+	evaluations_marker = 0
+	evaluation_marks = np.array([])
+
 	while evaluations < max_eval:
 		for i in range(0,len(candidates)):
 			# Intragroup Competition: regular members try to become candidates of their group
@@ -36,4 +39,8 @@ def POA(CostFunction, dim=10, nparties=4, nmembers=5, ncandidates=2,
 
 		evaluations += new_evaluations
 
-	return np.min(candidates_fitness)
+		if evaluations >= evaluations_marker:
+			evaluation_marks = np.insert(evaluation_marks, len(evaluation_marks), np.min(candidates_fitness))
+			evaluations_marker += max_eval / 10
+
+	return np.append(evaluation_marks, np.min(candidates_fitness))
