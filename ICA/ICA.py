@@ -2,6 +2,7 @@
 # Developed By: Esmaeil Atashpaz Gargari
 # Translated to Python By: Juanjo Sierra
 
+import numpy as np
 from GenerateNewCountries import *
 from CreateInitialEmpires import *
 from AssimilateColonies import *
@@ -12,7 +13,7 @@ from ImperialisticCompetition import *
 
 def ICA(CostFunction, dim=10, ncountries=200, nimperialists=8, decades=2000,
         evaluation_criteria=False, max_eval=10000, revolution_rate=0.3, assimilation_coef=2,
-        assimilation_angle_coef=0.75, zeta=0.1, damp_ratio=0.99, stop_if_just_one_empire=False,
+        assimilation_angle_coef=np.pi/4, zeta=0.1, damp_ratio=0.99, stop_if_just_one_empire=False,
         uniting_threshold=0.02, lower_bound=0, upper_bound=10):
 
     # Zarib is used to prevent the weakest empire to have a probability of zero
@@ -44,6 +45,8 @@ def ICA(CostFunction, dim=10, ncountries=200, nimperialists=8, decades=2000,
     current_decade = 0
 
     # Main loop
+    evaluations_marker = 0
+    evaluation_marks = np.array([])
     while (evaluation_criteria and (evaluations < max_eval)) or (not evaluation_criteria and (current_decade < decades)):
         revolution_rate = damp_ratio*revolution_rate
 
@@ -84,6 +87,10 @@ def ICA(CostFunction, dim=10, ncountries=200, nimperialists=8, decades=2000,
         else:
             current_decade += 1
 
+        if evaluations >= evaluations_marker:
+            evaluation_marks = np.insert(evaluation_marks, len(evaluation_marks), min(imperialists_fitness))
+            evaluations_marker += max_eval / 10 
+
         #print("Decade {:4}, best solution: {:e}".format(decade, min(imperialists_fitness)))
 
-    return min(imperialists_fitness)
+    return np.append(evaluation_marks, min(imperialists_fitness))
