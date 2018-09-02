@@ -138,7 +138,8 @@ if __name__ == "__main__":
     time1 = time.time()
     results = np.array([SLC(f25, dim=dim, max_eval=evaluations, nteams=teams,
         nmain=main_players, nsubs=sub_players, mutation_probability=mutation_probability,
-        mutation_rate=mutation_rate, lower_bound=-999999, upper_bound=999999) for _ in range(repeats)])
+        mutation_rate=mutation_rate, lower_bound=-10, upper_bound=10,
+        initial_population_lower_bound=2, initial_population_upper_bound=5) for _ in range(repeats)])
     total_time = time.time() - time1
 
     means = results.mean(axis=0)
