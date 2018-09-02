@@ -1,8 +1,14 @@
 import numpy as np
 from ChooseCandidates import *
 
-def DefineInitialParties(CostFunction, nparties, nmembers, ncandidates, dim, domain):
+def DefineInitialParties(CostFunction, nparties, nmembers, ncandidates, dim, domain, initial_domain):
     lower_bound, upper_bound = domain
+    initial_lower_bound, initial_upper_bound = initial_domain
+
+    if initial_lower_bound != None and initial_upper_bound != None:
+        lower_bound = initial_lower_bound
+        upper_bound = initial_upper_bound
+
     nregularmembers = nmembers - ncandidates;
 
     # First we create the regular members of each party; it has to be saved in a list

@@ -9,14 +9,16 @@ from InterGroupCooperation import *
 def POA(CostFunction, dim=10, nparties=4, nmembers=5, ncandidates=2,
 		lower_bound=0, upper_bound=10, max_eval=10000, merge_probability=0.01,
 		deletion_probability=0.001, bias=0.3, member_weighting=0.01,
-		candidate_weighting=1, groups_to_merge=2, groups_to_delete=1):
+		candidate_weighting=1, groups_to_merge=2, groups_to_delete=1,
+		initial_population_lower_bound=None, initial_population_upper_bound=None):
 
 	# Domain of the function, tuple including lower and upper bounds
 	domain = (lower_bound, upper_bound)
+	initial_domain = (initial_population_lower_bound, initial_population_upper_bound)
 
 	# Define the initial parties and candidates
 	candidates, candidates_fitness, members, members_fitness = DefineInitialParties(CostFunction,
-			nparties, nmembers, ncandidates, dim, domain)
+			nparties, nmembers, ncandidates, dim, domain, initial_domain)
 
 	evaluations = nparties * nmembers
 	group_power = np.zeros(nparties)
