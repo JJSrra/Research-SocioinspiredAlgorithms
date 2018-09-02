@@ -15,7 +15,7 @@ def IntraGroupCompetition(CostFunction, candidates, candidates_fitness, members,
     # Operations as in the formula seen in the paper
     sum_up = np.apply_along_axis(sum, 1, dif*fitness_rep)
     sum_down = np.sum(candidates_fitness)
-    possible_changes = members + bias*(sum_up/sum_down)
+    possible_changes = np.clip(members + bias*(sum_up/sum_down), lower_bound, upper_bound)
 
     # Now we have to check which members are going to change, only if they have upgraded their fitness
     new_fitness = np.apply_along_axis(CostFunction, 1, possible_changes)
