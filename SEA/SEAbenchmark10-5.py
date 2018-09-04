@@ -6,7 +6,7 @@ import os
 
 if __name__ == "__main__":
     dim = 10
-    repeats = 1
+    repeats = 10
     evaluations = 10000*dim
     individuals = 30
     k1 = 0.1
