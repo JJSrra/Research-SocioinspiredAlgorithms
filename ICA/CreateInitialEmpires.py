@@ -29,6 +29,9 @@ def CreateInitialEmpires(countries, fitness, nimperialists, zeta):
     new_colonies_fitness = np.split(colonies_fitness, cumulative_colonies_per_imperialist)
     empires_total_cost = np.array([])
 
+    if len(new_colonies[-1]) == 0:
+        new_colonies[-1] = np.append(new_colonies[-1], colonies[-1])
+
     for i in range(0,nimperialists):
         empires_total_cost = np.append(empires_total_cost, imperialists_fitness[i] + zeta * np.mean(colonies_fitness[i]))
 
