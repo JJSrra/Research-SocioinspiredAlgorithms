@@ -2,7 +2,7 @@
 
 ### By Juanjo Sierra
 
-Research and statistic study on some Socioinspired Algorithms for my bachelor's thesis.
+Research and statistic study on some Socioinspired Algorithms for my bachelor's thesis. You can read the whole thesis (in Spanish) [here](https://github.com/JJSrra/Documentacion-TFG).
 
 I will be uploading source code from each one of them as I implement them. At the end, there will be 6 algorithms:
 - Soccer League Competition (SLC)
